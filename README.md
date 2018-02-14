@@ -35,16 +35,24 @@ Open the index.html webpage in a browser
 
 ## Credits
 SmartLease is owned and maintained by
+
 Andrew Birnbera ([@birnbera](https://twitter.com/birnbera))
+
 Holden Grissett ([@holdengs](https://twitter.com/holdengs))
+
 Felicia Hsieh ([@feliciahsiehsw](https://twitter.com/feliciahsiehsw)).
+
 Alexa Orrico ([@alexaorrico](https://twitter.com/alexaorrico))
+
 Wendy Segura ([@wendysegura](https://twitter.com/wendysegura))
+
 Kiren Srinivasan ([@srinitude](https://twitter.com/srinitude))
+
 Minas Anton ([@minasanton](https://twitter.com/minasanton))
+
 Tope Olape ([@topeolape](https://twitter.com/topeolape))
 
 You can reply to us and to [@holbertonschool](https://twitter.com/holbertonschool) on Twitter for more updates on this project and our forked projects.
 
 ## License
-Monty is released under the MIT license. See [LICENSE](https://github.com/srinitude/monty/blob/master/LICENSE) for details.
+SmartLease is released under the MIT license. See [LICENSE](https://github.com/srinitude/monty/blob/master/LICENSE) for details.
