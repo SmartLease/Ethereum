@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="SmartLease creates Ethereum contracts">
+    <meta name="description" content="SmartLease New Contract page">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -26,7 +26,7 @@
       <ul class="nav justify-content-end bg-light">
         <li class="nav-item">
           <div style="height:50px; vertical-align:middle; display:table-cell;">
-            <button id="Login" class="btn btn-info" type="submit">Login</button>
+            <button class="btn btn-info" type="submit">Logout</button>
           </div>
         </li>
       </ul>
@@ -44,44 +44,56 @@
           <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
               <div class="row">&nbsp</div>
-              <div align="center">
-                <button id="ButtonNewContract" class="btn btn-primary" type="submit">New Contracts</button>
+                <p>Please fill in the following information to create a contract.</p>
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td scope="row"><label class="control-label" for="slTitle">Title</label></td>
+                      <td><input id="slTitle" name="slTitle" value="" type="text" autofocus></td>
+                    </tr>
+                    <tr>
+                      <td scope="row"><label class="control-label" for="slSenderName">Sender Name</label></td>
+                      <td><input id="slSenderName" name="slSenderName" value="" type="text"></td>
+                    </tr>
+                    <tr>
+                      <td><label class="control-label" for="slRecipientName">Recipient Name</label></td>
+                      <td><input id="slRecipient Name" name="slRecipientName" value="" type="text"></td>
+                    </tr>
+                    <tr>
+                      <td><label class="control-label" for="slSenderAccountID">Sender Account ID</label></td>
+                      <td><input id="slSenderAccountID" name="slSenderAccountID" value="" type="text"></td>
+                    </tr>
+                    <tr>
+                      <td><label class="control-label" for="slValue">Value</label></td>
+                      <td><input id="slValue" name="slValue" value="" type="text"></td>
+                    </tr>
+                    <tr>
+                      <td><label class="control-label" for="slDuration">Duration</label></td>
+                      <td><input id="slDuration" name="slDuration" value="" type="text"></td>
+                    </tr>
+                    <tr>
+                      <td><label class="control-label" for="slStartDate">Start Date</label></td>
+                      <td><input id="slStartDate" name="slStartDate" value="" type="date"></td>
+                    </tr>
+                    <tr>
+                      <td><label class="control-label" for="slEndDate">End Date</label></td>
+                      <td><input id="slEndDate" name="slEndDate" value="" type="date"></td>
+                    </tr>
+                    <tr>
+                      <td><label class="control-label" for="slExpirationDate">Expiration Date</label></td>
+                      <td><input id="slExpirationDate" name="slExpirationDate" value="" type="date"></td>
+                    </tr>
+                    <tr>
+                      <td><label class="control-label" for="slCosigners">Co-signers</label></td>
+                      <td><input id="slCosigners" name="slCosigners" value="" type="text">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div align="center">
+                  <button id="ButtonSubmitContract" class="btn btn-primary" type="submit">Submit</button>
+                </div>
               </div>
-              <div class="row">&nbsp</div>
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">Contract</th>
-                    <th scope="col">Effective Date</th>
-                    <th scope="col">Start Date</th>
-                    <th scope="col">End Date</th>
-                    <th scope="col">Value</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">001</th>
-                    <td>03/01/2018</td>
-                    <td>03/31/2019</td>
-                    <td>03/01/2018</td>
-                    <td>$123.00</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">002</th>
-                    <td>04/01/2018</td>
-                    <td>04/30/2019</td>
-                    <td>04/01/2018</td>
-                    <td>$500.00</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">003</th>
-                    <td>05/01/2018</td>
-                    <td>05/31/2019</td>
-                    <td>05/01/2018</td>
-                    <td>$700.00</td>
-                  </tr>
-                </tbody>
-              </table>
             </div>
           <div class="tab-pane fade" id="v-pills-contracts" role="tabpanel" aria-labelledby="v-pills-profile-tab">...aaaaaaa</div>
           <div class="tab-pane fade" id="v-pills-help" role="tabpanel" aria-labelledby="v-pills-help-tab">...bbbbbbbb</div>
