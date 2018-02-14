@@ -1,1 +1,50 @@
-# Ethereum
+# Smart Lease
+
+<img src="https://github.com/yyyy.png" style="height:15%;width:15%" />
+
+## Welcome
+Our SmartLease project will stipulate the minimum components of an Ethereum smart contract for Property leases between Landlords and Tenants.
+
+## Table of Contents
+* [Requirements](#requirements)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Credits](#credits)
+* [License](#license)
+
+## Requirements
+* Ubuntu (v14.04 LTS)
+* Bootstrap (v4)
+
+## Installation
+In your terminal, git clone the directory with the following command:
+```
+git clone https://github.com/SmartLease/Ethereum.git
+```
+
+Compile the files using:
+
+```sh
+aaaaaaaaaa
+```
+
+## Usage
+```sh
+Open the index.html webpage in a browser
+```
+
+## Credits
+SmartLease is owned and maintained by
+Andrew Birnbera ([@birnbera](https://twitter.com/birnbera))
+Holden Grissett ([@holdengs](https://twitter.com/holdengs))
+Felicia Hsieh ([@feliciahsiehsw](https://twitter.com/feliciahsiehsw)).
+Alexa Orrico ([@alexaorrico](https://twitter.com/alexaorrico))
+Wendy Segura ([@wendysegura](https://twitter.com/wendysegura))
+Kiren Srinivasan ([@srinitude](https://twitter.com/srinitude))
+Minas Anton ([@minasanton](https://twitter.com/minasanton))
+Tope Olape ([@topeolape](https://twitter.com/topeolape))
+
+You can reply to us and to [@holbertonschool](https://twitter.com/holbertonschool) on Twitter for more updates on this project and our forked projects.
+
+## License
+Monty is released under the MIT license. See [LICENSE](https://github.com/srinitude/monty/blob/master/LICENSE) for details.
