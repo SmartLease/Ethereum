@@ -1,6 +1,6 @@
 # Smart Lease
 
-<img src="https://github.com/yyyy.png" style="height:15%;width:15%" />
+<img src="SMARTLease.png" style="height:15%;width:15%" />
 
 ## Welcome
 Our SmartLease project will stipulate the minimum components of an Ethereum smart contract for Property leases between Landlords and Tenants.
