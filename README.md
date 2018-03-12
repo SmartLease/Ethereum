@@ -55,4 +55,4 @@ Tope Olape ([@topeolape](https://twitter.com/topeolape))
 You can reply to us and to [@holbertonschool](https://twitter.com/holbertonschool) on Twitter for more updates on this project and our forked projects.
 
 ## License
-SmartLease is released under the MIT license. See [LICENSE](https://github.com/srinitude/monty/blob/master/LICENSE) for details.
+SmartLease is released under the MIT license.
