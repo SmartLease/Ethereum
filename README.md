@@ -25,7 +25,7 @@ git clone https://github.com/SmartLease/Ethereum.git
 Compile the files using:
 
 ```sh
-aaaaaaaaaa
+TBD
 ```
 
 ## Usage
@@ -40,7 +40,7 @@ Andrew Birnbera ([@birnbera](https://twitter.com/birnbera))
 
 Holden Grissett ([@holdengs](https://twitter.com/holdengs))
 
-Felicia Hsieh ([@feliciahsiehsw](https://twitter.com/feliciahsiehsw)).
+Felicia Hsieh ([@feliciahsiehsw](https://twitter.com/feliciahsiehsw))
 
 Alexa Orrico ([@alexaorrico](https://twitter.com/alexaorrico))
 
