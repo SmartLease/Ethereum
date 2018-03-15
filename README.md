@@ -50,7 +50,7 @@ Kiren Srinivasan ([@srinitude](https://twitter.com/srinitude))
 
 Minas Anton ([@minasanton](https://twitter.com/minasanton))
 
-Tope Olape ([@topeolape](https://twitter.com/topeolape))
+Tope Agboola ([@topea_](https://twitter.com/topea_))
 
 You can reply to us and to [@holbertonschool](https://twitter.com/holbertonschool) on Twitter for more updates on this project and our forked projects.
 
