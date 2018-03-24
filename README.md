@@ -52,7 +52,7 @@ Minas Anton ([@minasanton](https://twitter.com/minasanton))
 
 Tope Agboola ([@topea_](https://twitter.com/topea_))
 
-You can reply to us and to [@holbertonschool](https://twitter.com/holbertonschool) on Twitter for more updates on this project and our forked projects.
+You can reply to us and to [@holbertonschool](https://twitter.com/holbertonschool) on Twitter for more updates on this project & our forked projects.
 
 ## License
 SmartLease is released under the MIT license.
