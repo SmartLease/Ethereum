@@ -51,8 +51,8 @@
 	<!--- LEFT MENU BAR START -->
         <div class="col-2">
           <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
-            <a class="nav-link" id="v-pills-contracts-tab" data-toggle="pill" href="#v-pills-contracts" role="tab" aria-controls="v-pills-contracts" aria-selected="false">Contracts</a>
+            <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
+            <a class="nav-link active" id="v-pills-contracts-tab" data-toggle="pill" href="#v-pills-contracts" role="tab" aria-controls="v-pills-contracts" aria-selected="false">Contracts</a>
             <a class="nav-link" id="v-pills-about-tab" data-toggle="pill" href="#v-pills-about" role="tab" aria-controls="v-pills-about" aria-selected="false">About Us</a>
           </div>
         </div>
@@ -61,80 +61,103 @@
         <div class="col-10">
           <div class="tab-content" id="v-pills-tabContent">
 	    <!--- MENU-HOME START -->
-            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-	      <div>SmartLease is a blockchain project created by a Holberton School students as a proof-of-concept as applied to property leases.</div>
-	    </div>
+            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"></div>
 	    <!--- MENU-HOME END -->
 	    <!--- MENU-CONTRACTS START -->
             <div class="tab-pane fade" id="v-pills-contracts" role="tabpanel" aria-labelledby="v-pills-contracts-tab">
-		<div class="row">&nbsp</div>
-		<div align="center">
-		  <form>
-                    <button id="ButtonNewContract" class="btn btn-primary" type="submit" formaction="contracts.html">New Contract</button>
-		  </form>
-		</div>
-		<div class="row">&nbsp</div>
-		<small>
-	        <table class="table table-striped">
-                  <thead>
-                    <tr>
-		      <th scope="col">Signed</th>
-                      <th scope="col">L/T</th>
-                      <th scope="col">Contract ID</th>
-                      <th scope="col">Contract Name</th>
-                      <th scope="col">Tenant Name</th>
-                      <th scope="col">Property ID</th>
-                      <th scope="col">Start Date</th>
-                      <th scope="col">End Date</th>
-                      <th scope="col">Effective Date</th>
-                      <th scope="col">Value</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td scope="col">Y</td>
-		      <td>L</td>
-                      <td>01234567890123456789</td>
-                      <td>MyRental In NYC</td>
-                      <td>J Smith</td>
-                      <td>12-AB-CD-DE-F1</td>
-                      <td>03/13/2018</td>
-                      <td>04/01/2019</td>
-                      <td>04/01/2018</td>
-                      <td>3000.00</td>
-                    </tr>
-                    <tr>
-                      <td scope="col">Y</td>
-		      <td>L</td>
-                      <td>23456789012345678901</td>
-                      <td>MyRental 42nd St</td>
-                      <td>G Washington</td>
-                      <td>12-AB-CD-DE-F2</td>
-                      <td>06/15/2018</td>
-                      <td>06/15/2019</td>
-                      <td>06/15/2018</td>
-                      <td>2500.00</td>
-                    </tr>
-                    <tr>
-                      <td scope="col">N</td>
-		      <td>T</td>
-                      <td>01234567890123456789</td>
-                      <td>My Condo In Austin</td>
-                      <td>A Hamilton</td>
-                      <td>12-AB-CD-DE-F1</td>
-                      <td>03/13/2018</td>
-                      <td>04/01/2019</td>
-                      <td>04/01/2018</td>
-                      <td>2000.00</td>
-                    </tr>
-                  </tbody>
-		</table>
-		</small>
+	      <small>
+		<form id="addContract">
+
+		  <div class="btn-group" data-toggle="buttons">
+		    <label class="active">
+		      <input type="radio" name="roleLandlord" id="roleLandlord" value="landlord" autocomplete="off" checked>&nbsp;&nbsp;&nbsp;<h4>Landlord</h4>
+		    </label>
+		    &nbsp;&nbsp;&nbsp;
+		    <label>
+		      <input type="radio" name="roleTenant" id="roleTenant" value="tenant" autocomplete="off">&nbsp;&nbsp;&nbsp;<h4>Tenant</h4>
+		    </label>
+		  </div>
+
+		  <div class="form-group">
+		    <label for="lInputUsername">Username</label>
+		    <input type="text" class="form-control" id="lInputUsername" placeholder="Username">
+		  </div>
+		  <div class="form-group">
+		    <label for="lInputEmail">Email</label>
+		    <input type="email" class="form-control" id="lInputEmail" placeholder="Email">
+		  </div>
+		  <div class="form-group">
+		    <label for="lInputFirstName">First Name</label>
+		    <input type="text" class="form-control" id="lFirstName" placeholder="First Name">
+		  </div>
+		  <div class="form-group">
+		    <label for="lInputLastName">Last Name</label>
+		    <input type="text" class="form-control" id="lLastName" placeholder="Last Name">
+		  </div>
+		  <div class="form-group">
+		    <label for="lInputContractID">Contract ID</label>
+		    <input type="text" class="form-control" id="lInputContractID" placeholder="Contract ID">
+		  </div>
+		  <div class="form-group">
+		    <label for="lInputContractID">Contract Name</label>
+		    <input type="text" class="form-control" id="lInputContractName" placeholder="Contract Name">
+		  </div>
+		  <div class="form-group">
+		    <label for="lInputLeaseDuration">Lease Duration</label>
+		    <input type="text" class="form-control" id="lInputLeaseDuration" placeholder="Lease Duration">
+		  </div>
+		  <div class="form-group">
+		    <label for="lInputContractTermsLink">Contract Terms Link</label>
+		    <input type="text" class="form-control" id="lInputContractTermsLink" placeholder="Contract Terms Link">
+		  </div>
+		  <hr>
+		  <h3>Property Info</h3>
+		  <div class="form-group">
+		    <label for="lInputPropertyName">Property Name</label>
+		    <input type="text" class="form-control" id="lInputPropertyName" placeholder="Property Name">
+		  </div>
+		  <div class="form-group">
+		    <label for="lInputPropertyID">Property ID</label>
+		    <input type="text" class="form-control" id="lInputPropertyID" placeholder="Property ID">
+		  </div>
+		  <div class="form-group">
+		    <label for="lInputAddress1">Address 1</label>
+		    <input type="text" class="form-control" id="lInputAddress1" placeholder="Address 1">
+		  </div>
+		  <div class="form-group">
+		    <label for="lInputAddress1">Address 2</label>
+		    <input type="text" class="form-control" id="lInputAddress2" placeholder="Address 2">
+		  </div>
+		  <div class="form-group">
+		    <label for="lInputCity">City</label>
+		    <input type="text" class="form-control" id="lInputCity" placeholder="City">
+		  </div>
+		  <div class="form-group">
+		    <label for="lInputState">State</label>
+		    <input type="text" class="form-control" id="lInputState" placeholder="State">
+		  </div>
+		  <div class="form-group">
+		    <label for="lInputCountry">Country</label>
+		    <input type="text" class="form-control" id="lInputCountry" placeholder="Country">
+		  </div>
+		  <div class="form-group">
+		    <label for="lInputPropertyDescription">Property Description</label>
+		    <input type="text" class="form-control" id="lInputPropertyDescription" placeholder="Property Description">
+		  </div>
+		  <div class="form-group">
+		    <label for="lInputPropertyPhoto">Property Photo</label>
+		    <input type="text" class="form-control" id="lInputPropertyPhoto" placeholder="Property Photo">
+		  </div>
+		  
+		  <p align="center">
+		    <button type="submit" class="btn btn-primary" id="CancelNewContract">Cancel</button>&nbsp;&nbsp;&nbsp;&nbsp;
+		    <button type="submit" class="btn btn-primary" id="SubmitNewContract">Submit</button>
+		  </p>
+		</form>
+		
+	      </small>
 	    </div>
 	    <!--- MENU-CONTRACTS END -->
-	    <!--- MENU-HELP START -->
-            <div class="tab-pane fade" id="v-pills-help" role="tabpanel" aria-labelledby="v-pills-help-tab">...bbbbbbbb</div>
-	    <!--- MENU-HELP END -->
 	    <!--- MENU-ABOUT US START -->
             <div class="tab-pane fade" id="v-pills-about" role="tabpanel" aria-labelledby="v-pills-about-tab">
 	      <!-- Introduction Row -->
