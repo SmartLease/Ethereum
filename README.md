@@ -1,6 +1,6 @@
 # Smart Lease
 
-<img src="SMARTLease.png" style="height:15%;width:15%" />
+<p align="center"><img src="SMARTLease.png" width="150px" /></p>
 
 ## Welcome
 Our SmartLease project will stipulate the minimum components of an Ethereum smart contract for Property leases between Landlords and Tenants.
@@ -14,7 +14,7 @@ Our SmartLease project will stipulate the minimum components of an Ethereum smar
 
 ## Requirements
 * Ubuntu (v14.04 LTS)
-* Bootstrap (v4)
+* Solidity (v0.4.21)
 
 ## Installation
 In your terminal, git clone the directory with the following command:
