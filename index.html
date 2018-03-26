@@ -49,7 +49,7 @@
       <!--- NAVIGATION BAR END -->
       <div class="row">
 	<!--- LEFT MENU BAR START -->
-        <div class="col-3">
+        <div class="col-2">
           <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
             <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
             <a class="nav-link" id="v-pills-contracts-tab" data-toggle="pill" href="#v-pills-contracts" role="tab" aria-controls="v-pills-contracts" aria-selected="false">Contracts</a>
@@ -59,54 +59,84 @@
         </div>
 	<!--- LEFT MENU BAR END -->
 	<!--- MAIN PANE START -->
-        <div class="col-9">
+        <div class="col-10">
           <div class="tab-content" id="v-pills-tabContent">
+	    <!--- MENU-HOME START -->
             <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-	      <div>SmartLease is a blockchain project.</div>
+	      <div>SmartLease is a blockchain project created by a Holberton School students as a proof-of-concept as applied to property leases.</div>
 	    </div>
+	    <!--- MENU-HOME END -->
+	    <!--- MENU-CONTRACTS START -->
             <div class="tab-pane fade" id="v-pills-contracts" role="tabpanel" aria-labelledby="v-pills-contracts-tab">
 		<div class="row">&nbsp</div>
 		<div align="center">
                   <button id="ButtonNewContract" class="btn btn-primary" type="submit">New Contract</button>
 		</div>
 		<div class="row">&nbsp</div>
+		<small>
 	        <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th scope="col">Contract</th>
-                      <th scope="col">Effective Date</th>
+		      <th scope="col">Signed</th>
+                      <th scope="col">L/T</th>
+                      <th scope="col">Contract ID</th>
+                      <th scope="col">Contract Name</th>
+                      <th scope="col">Tenant Name</th>
+                      <th scope="col">Property ID</th>
                       <th scope="col">Start Date</th>
                       <th scope="col">End Date</th>
+                      <th scope="col">Effective Date</th>
                       <th scope="col">Value</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <th scope="row">001</th>
-                      <td>03/01/2018</td>
-                      <td>03/31/2019</td>
-                      <td>03/01/2018</td>
-                      <td>$123.00</td>
+                      <td scope="col">Y</td>
+		      <td>L</td>
+                      <td>01234567890123456789</td>
+                      <td>MyRental In NYC</td>
+                      <td>J Smith</td>
+                      <td>12-AB-CD-DE-F1</td>
+                      <td>03/13/2018</td>
+                      <td>04/01/2019</td>
+                      <td>04/01/2018</td>
+                      <td>3000.00</td>
                     </tr>
                     <tr>
-                      <th scope="row">002</th>
-                      <td>04/01/2018</td>
-                      <td>04/30/2019</td>
-                      <td>04/01/2018</td>
-                      <td>$500.00</td>
+                      <td scope="col">Y</td>
+		      <td>L</td>
+                      <td>23456789012345678901</td>
+                      <td>MyRental 42nd St</td>
+                      <td>G Washington</td>
+                      <td>12-AB-CD-DE-F2</td>
+                      <td>06/15/2018</td>
+                      <td>06/15/2019</td>
+                      <td>06/15/2018</td>
+                      <td>2500.00</td>
                     </tr>
                     <tr>
-                      <th scope="row">003</th>
-                      <td>05/01/2018</td>
-                      <td>05/31/2019</td>
-                      <td>05/01/2018</td>
-                      <td>$700.00</td>
+                      <td scope="col">N</td>
+		      <td>T</td>
+                      <td>01234567890123456789</td>
+                      <td>My Condo In Austin</td>
+                      <td>A Hamilton</td>
+                      <td>12-AB-CD-DE-F1</td>
+                      <td>03/13/2018</td>
+                      <td>04/01/2019</td>
+                      <td>04/01/2018</td>
+                      <td>2000.00</td>
                     </tr>
                   </tbody>
 		</table>
+		</small>
 	    </div>
+	    <!--- MENU-CONTRACTS END -->
+	    <!--- MENU-HELP START -->
             <div class="tab-pane fade" id="v-pills-help" role="tabpanel" aria-labelledby="v-pills-help-tab">...bbbbbbbb</div>
+	    <!--- MENU-HELP END -->
+	    <!--- MENU-ABOUT START -->
             <div class="tab-pane fade" id="v-pills-about" role="tabpanel" aria-labelledby="v-pills-about-tab">...cccccccc</div>
+	    <!--- MENU-ABOUT END -->
           </div>
 	</div>
 	<!--- MAIN PANE END -->
