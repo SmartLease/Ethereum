@@ -68,16 +68,13 @@
 	      <small>
 		<form id="addContract">
 
-		  <div class="btn-group" data-toggle="buttons">
-		    <label class="active">
-		      <input type="radio" name="roleLandlord" id="roleLandlord" value="landlord" autocomplete="off" checked>&nbsp;&nbsp;&nbsp;<h4>Landlord</h4>
-		    </label>
-		    &nbsp;&nbsp;&nbsp;
-		    <label>
-		      <input type="radio" name="roleTenant" id="roleTenant" value="tenant" autocomplete="off">&nbsp;&nbsp;&nbsp;<h4>Tenant</h4>
-		    </label>
-		  </div>
-
+		  Are you a:
+		  <p align="center">
+		    <div class="btn-group" role="group" aria-label="ContractRole">
+		      <button type="button" class="btn btn-success">Landlord</button>
+		      <button type="button" class="btn btn-success">Tenant</button>
+		    </div>
+		  </p>
 		  <div class="form-group">
 		    <label for="lInputUsername">Username</label>
 		    <input type="text" class="form-control" id="lInputUsername" placeholder="Username">
