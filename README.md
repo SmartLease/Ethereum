@@ -24,9 +24,7 @@ TBD
 ```
 
 ## Usage
-```sh
 Open the [SmartLease](https://smartlease.github.io/Ethereum/) webpage in a browser
-```
 
 ## Credits
 SmartLease is owned and maintained by
