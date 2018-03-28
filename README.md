@@ -17,20 +17,15 @@ Our SmartLease project will stipulate the minimum components of an Ethereum smar
 * Solidity (v0.4.21)
 
 ## Installation
-In your terminal, git clone the directory with the following command:
-```
-git clone https://github.com/SmartLease/Ethereum.git
-```
 
-Compile the files using:
-
-```sh
+Install Solidity by ...
+```
 TBD
 ```
 
 ## Usage
 ```sh
-Open the index.html webpage in a browser
+Open the [SmartLease](https://smartlease.github.io/Ethereum/) webpage in a browser
 ```
 
 ## Credits
