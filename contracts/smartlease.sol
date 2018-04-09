@@ -1,12 +1,12 @@
 pragma solidity ^0.4.21;
 
-import "./node_modules/zeppelin-solidity/contracts/ownership/Ownable.sol";
-import "./node_modules/zeppelin-solidity/contracts/ECRecovery.sol";
+import "zeppelin-solidity/contracts/ownership/Ownable.sol";
+import "zeppelin-solidity/contracts/ECRecovery.sol";
 
 contract DateTimeAPI {
     /*
     *  Abstract contract for interfacing with the DateTime contract.
-    *
+    *  See: https://github.com/pipermerriam/ethereum-datetime/blob/master/contracts/DateTime.sol
     */
     function isLeapYear(uint16 year) public pure returns (bool);
     function getYear(uint timestamp) public pure returns (uint16);
@@ -33,7 +33,7 @@ contract SmartLease is Ownable {
         string lastName;
     }
 
-    address dtContract = 0x1a6184CD4C5Bea62B0116de7962EE7315B7bcBce;
+    address dtContract = 0; // main chain address: 0x1a6184CD4C5Bea62B0116de7962EE7315B7bcBce;
     DateTimeAPI DateTime = DateTimeAPI(dtContract);
 
     Person public landlord;
@@ -54,9 +54,15 @@ contract SmartLease is Ownable {
         _;
     }
 
-    function signLease(bytes32 hash, bytes sig) public {
-        require(msg.sender == ECRecovery.recover(hash, sig) && hash == keccak256("I agree"));
+    modifier dateTimeAddressValid(address _dtAddress) {
+        require(_dtAddress != 0);
+        _;
+    }
+
+    function signLease(bytes32 _hash, bytes _sig) public {
+        require(msg.sender == ECRecovery.recover(_hash, _sig) && _hash == keccak256("I AGREE"));
         tenantToSigned[msg.sender] = true;
+        isSigned = true;
     }
 
     function SmartLease(string _firstName, string _lastName) public {
@@ -72,11 +78,11 @@ contract SmartLease is Ownable {
         emit NewTenant(_firstName, _lastName);
     }
 
-    function setStartDate(uint16 _year, uint8 _month, uint8 _day) public onlyOwner beforeSigning {
+    function setStartDate(uint16 _year, uint8 _month, uint8 _day) public onlyOwner beforeSigning dateTimeAddressValid(dtContract) {
         startDate = DateTime.toTimestamp(_year, _month, _day);
     }
 
-    function setEndDate(uint16 _year, uint8 _month, uint8 _day) public onlyOwner beforeSigning {
+    function setEndDate(uint16 _year, uint8 _month, uint8 _day) public onlyOwner beforeSigning dateTimeAddressValid(dtContract) {
         endDate = DateTime.toTimestamp(_year, _month, _day);
     }
 
