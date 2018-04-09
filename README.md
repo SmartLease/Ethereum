@@ -35,8 +35,6 @@ Holden Grissett ([@holdengs](https://twitter.com/holdengs))
 
 Felicia Hsieh ([@feliciahsiehsw](https://twitter.com/feliciahsiehsw))
 
-Alexa Orrico ([@alexaorrico](https://twitter.com/alexaorrico))
-
 Wendy Segura ([@wendysegura](https://twitter.com/wendysegura))
 
 Kiren Srinivasan ([@srinitude](https://twitter.com/srinitude))
