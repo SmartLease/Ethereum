@@ -31,7 +31,7 @@
   ============================-->
   <header id="header">
     <div class="container">
-
+      
       <div id="logo" class="pull-left">
         <a href="#hero"><img src="img/logo.png" width="50px" alt="" title="" /></img></a>
         <!-- Uncomment below if you prefer to use a text logo -->
@@ -44,53 +44,50 @@
           <li><a href="#about">About Us</a></li>
 	  <li><a href="#team">Team</a></li>
 	  <li><a href="#contact">Contact Us</a></li>
+	  <li><button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">LOGIN</button></li>
+	  <div id="id01" class="modal">
+	    
+	    <form class="modal-content animate" action="/action_page.php">
+	      <div class="imgcontainer">
+		<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+	      </div>
 
-    <li>
-    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">LOGIN</button></li>
+	      <div class="container">
+		<label for="uname"><b>Username</b></label>
+		<input type="text" placeholder="Enter Username" name="uname" required>
 
-    <div id="id01" class="modal">
-  
-    <form class="modal-content animate" action="/action_page.php">
-    <div class="imgcontainer">
-      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-    </div>
-
-    <div class="container">
-      <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required>
-
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
-
-      <div class="submitbtn" style="background-color:#59cad1">
-      <input type="button" value="Login" onclick="location.href = 'contracts.html';">
-    </div>
+		<label for="psw"><b>Password</b></label>
+		<input type="password" placeholder="Enter Password" name="psw" required>
+		
+		<div class="submitbtn" style="background-color:#59cad1">
+		  <input type="button" value="Login" onclick="location.href = 'contracts.html';">
+		</div>
       
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-      </label>
-    </div>
+		<label>
+		  <input type="checkbox" checked="checked" name="remember"> Remember me
+		</label>
+	      </div>
 
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-      <span class="psw">Forgot Password<a href="#">?</a></span>
-    </div>
-  </form>
-</div>
+	      <div class="container" style="background-color:#f1f1f1">
+		<button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+		<span class="psw">Forgot Password<a href="#">?</a></span>
+	      </div>
+	    </form>
+	  </div>
 
-<script>
-// Get the modal
-var modal = document.getElementById('id01');
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-
-</script>
-
+	  <script>
+	    // Get the modal
+	    var modal = document.getElementById('id01');
+	    
+	    // When the user clicks anywhere outside of the modal, close it
+	    window.onclick = function(event) {
+	    if (event.target == modal) {
+	    modal.style.display = "none";
+	    }
+	    }
+	    
+	  </script>
+	  
 	</ul>
       </nav><!-- #nav-menu-container -->
     </div>
