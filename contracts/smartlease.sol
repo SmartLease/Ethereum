@@ -40,7 +40,7 @@ contract SmartLease is Ownable {
     Person[] public tenants;
     mapping (address => uint) public tenantAddressToId;
     mapping (address => bool) public tenantToSigned;
-    uint public maxTenants;
+    uint public maxTenants = 1;
     uint public numTenants;
     uint public startDate;
     uint public endDate;
@@ -60,7 +60,7 @@ contract SmartLease is Ownable {
     }
 
     function signLease(bytes32 _hash, bytes _sig) public {
-        require(msg.sender == ECRecovery.recover(_hash, _sig) && _hash == keccak256("I AGREE"));
+        require(msg.sender == ECRecovery.recover(_hash, _sig) && _hash == keccak256("\x19Ethereum Signed Message:\n7I AGREE"));
         tenantToSigned[msg.sender] = true;
         isSigned = true;
     }
@@ -69,6 +69,11 @@ contract SmartLease is Ownable {
         landlord.firstName = _firstName;
         landlord.lastName = _lastName;
         emit NewSmartLease(owner);
+    }
+
+    function setMaxTenants(uint _maxTenants) public onlyOwner beforeSigning {
+        require(_maxTenants > 0);
+        maxTenants = _maxTenants;
     }
 
     function addTenant(string _firstName, string _lastName) public onlyOwner beforeSigning {
