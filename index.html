@@ -44,48 +44,7 @@
             <li><a href="#about">About Us</a></li>
 	    <li><a href="#team">Team</a></li>
 	    <li><a href="#contact">Contact Us</a></li>
-	    <li><button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">LOGIN</button></li>
-	    <div id="id01" class="modal">
-	      <form class="modal-content animate" action="/action_page.php">
-		<div class="imgcontainer">
-		  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-		</div>
-		
-		<div class="container">
-		  <label for="uname"><b>Username</b></label>
-		  <input type="text" placeholder="Enter Username" name="uname" required>
-		  
-		  <label for="psw"><b>Password</b></label>
-		  <input type="password" placeholder="Enter Password" name="psw" required>
-		  
-		  <div class="submitbtn" style="background-color:#59cad1">
-		    <input type="button" value="Login" onclick="location.href = 'contracts.html';">
-		  </div>
-		  
-		  <label>
-		    <input type="checkbox" checked="checked" name="remember"> Remember me
-		  </label>
-		</div>
-		
-		<div class="container" style="background-color:#f1f1f1">
-		  <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-		  <span class="psw">Forgot Password<a href="#">?</a></span>
-		</div>
-	      </form>
-	    </div>
-	    
-	    <script>
-	      // Get the modal
-	      var modal = document.getElementById('id01');
-	      
-	      // When the user clicks anywhere outside of the modal, close it
-	      window.onclick = function(event) {
-	        if (event.target == modal) {
-	          modal.style.display = "none";
-	        }
-	      }
-	    </script>
-	    
+	    <li><button onclick="contracts.html" style="width:auto;">GET STARTED</button></li>
 	  </ul>
 	</nav><!-- #nav-menu-container -->
       </div>
@@ -181,32 +140,33 @@
 	  </div>
 	  
 	  <div class="row">
-            <div class="col-lg-3 col-md-6">
-              <div class="member">
-		<div class="pic"><img class="rounded-circle" src="img/FeliciaHsieh.jpg" alt="Felicia Hsieh"></div>
-		<h4>Felicia Hsieh</h4>
-		<span>Front-End Developer / PM</span>
-		<div class="social">
-		  <a href="https://github.com/feliciahsieh"><i class="fa fa-github"></i></a>
-		  <a href="https://twitter.com/feliciahsiehsw"><i class="fa fa-twitter"></i></a>
-		  <a href="https://www.linkedin.com/in/feliciahsieh/"><i class="fa fa-linkedin"></i></a>
+	    <p align="center">
+              <div class="col-lg-3 col-md-6">
+		<div class="member">
+		  <div class="pic"><img class="rounded-circle" src="img/FeliciaHsieh.jpg" alt="Felicia Hsieh"></div>
+		  <h4>Felicia Hsieh</h4>
+		  <span>Front-End Developer / PM</span>
+		  <div class="social">
+		    <a href="https://github.com/feliciahsieh"><i class="fa fa-github"></i></a>
+		    <a href="https://twitter.com/feliciahsiehsw"><i class="fa fa-twitter"></i></a>
+		    <a href="https://www.linkedin.com/in/feliciahsieh/"><i class="fa fa-linkedin"></i></a>
+		  </div>
 		</div>
               </div>
-            </div>
-	    
-            <div class="col-lg-3 col-md-6">
-              <div class="member">
-		<div class="pic"><img class="rounded-circle" src="img/TopeAgboola.jpg" alt="Tope Agboola"></div>
-		<h4>Tope Agboola</h4>
-		<span>Front-End Developer</span>
-		<div class="social">
-                  <a href="https://github.com/tope628"><i class="fa fa-github"></i></a>
-                  <a href="https://twitter.com/topea_"><i class="fa fa-twitter"></i></a>
-                  <a href="https://www.linkedin.com/in/olatopeagboola/"><i class="fa fa-linkedin"></i></a>
+	      
+              <div class="col-lg-3 col-md-6">
+		<div class="member">
+		  <div class="pic"><img class="rounded-circle" src="img/TopeAgboola.jpg" alt="Tope Agboola"></div>
+		  <h4>Tope Agboola</h4>
+		  <span>Front-End Developer</span>
+		  <div class="social">
+                    <a href="https://github.com/tope628"><i class="fa fa-github"></i></a>
+                    <a href="https://twitter.com/topea_"><i class="fa fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/in/olatopeagboola/"><i class="fa fa-linkedin"></i></a>
+		  </div>
 		</div>
               </div>
-            </div>
-	    
+	    </p>
 	  </div>
 	  <div>
 	    <p align="center">With Special Thanks to Kiren Srinivasan</p>
