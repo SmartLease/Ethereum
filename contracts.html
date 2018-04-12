@@ -2,13 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Contracts</title>
+    <title>Smart Lease</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+    <meta content="SmartLease, ethereum, blockchain" name="keywords">
+    <meta content="SmartLease blockchain solution" name="description">
     
     <!-- Favicons -->
     <link href="img/favicon.png" rel="icon">
+    <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Poppins:300,400,500,700" rel="stylesheet">
@@ -24,97 +25,127 @@
     <link href="css/contract_style.css" rel="stylesheet">
   </head>
   
-  <!--==========================
-      Header
-      ============================-->
-  
-  <body>     
-    <header id="header">
-      <div class="container">
-	<div id="logo" class="pull-left">
-          <a href="#"><img src="img/logo.png" width="50px" alt="SmartLease Logo" title="SmartLease" /></a>
-	</div>
 
-	<nav id="nav-menu-container">
+  <body>
+    
+<!--==========================
+	Header
+============================-->
+  <header id="header">
+    <div class="container">
+	   <div id="logo" class="pull-left">
+      <a href="#"><img src="img/logo.png" width="50px" alt="SmartLease Logo" title="SmartLease" /></a>
+	   </div>
+	      <nav id="nav-menu-container">
           <ul class="nav-menu">
             <li class="menu-active"><a href="index.html">Home</a></li>
-            <li><a href="contracts.html">View</a></li>
-            <li class="menu-has-children"><a href="#">Create Contract</a>
-              <ul>
-	    </li>
-          </ul>
-	</nav><!-- #nav-menu-container -->
-
-      </div>
-    </header><!-- #header -->
-
+            <li><a href="index.html">About Us</a></li>
+	          <li><a href="index.html">Team</a></li>
+	          <li><a href="index.html">Contact Us</a></li>
+            
+	       </ul>
+        </nav><!-- #nav-menu-container -->
+    </div>
+  </header><!-- #header -->
+    
     <!--==========================
-	View Contracts
+	Hero Section
 	============================-->
-    <!--- MENU-CONTRACTS START -->
+  
+  <div class="text-center">
+    <button class="mybutton button1" data-toggle="modal" data-target=".bd-example-modal-lg">Create Contract</button>
+  </div>
+
+
+
+
+      <!-- Modal -->
+
+      <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+         
+
+
 
     <section id="about">
       <div class="container">
         <div class="row about-container">
           <div class="col-lg-6 content order-lg-1 order-2">
-	    <div class="container">
-	      <table class="table table-striped" align="left">
-		<thead>
-		  <tr>
-		    <th scope="col">Signed</th>
-		    <th scope="col">L/T</th>
-		    <th scope="col">Contract ID</th>
-		    <th scope="col">Contract Name</th>
-		    <th scope="col">Tenant Name</th>
-		    <th scope="col">Property ID</th>
-		    <th scope="col">Start Date</th>
-		    <th scope="col">End Date</th>
-		    <th scope="col">Effective Date</th>
-		    <th scope="col">Value</th>
-		  </tr>
-		</thead>
-		<tbody>
-		  <tr>
-		    <td scope="col">Y</td>
-		    <td>L</td>
-		    <td>01234567890123456789</td>
-		    <td>MyRental In NYC</td>
-		    <td>J Smith</td>
-		    <td>12-AB-CD-DE-F1</td>
-		    <td>03/13/2018</td>
-		    <td>04/01/2019</td>
-		    <td>04/01/2018</td>
-		    <td>3000.00</td>
-		  </tr>
-		  <tr>
-		    <td scope="col">Y</td>
-		    <td>L</td>
-		    <td>23456789012345678901</td>
-		    <td>MyRental 42nd St</td>
-		    <td>G Washington</td>
-		    <td>12-AB-CD-DE-F2</td>
-		    <td>06/15/2018</td>
-		    <td>06/15/2019</td>
-		    <td>06/15/2018</td>
-		    <td>2500.00</td>
-		  </tr>
-		  <tr>
-		    <td scope="col">N</td>
-		    <td>T</td>
-		    <td>01234567890123456789</td>
-		    <td>My Condo In Austin</td>
-		    <td>A Hamilton</td>
-		    <td>12-AB-CD-DE-F1</td>
-		    <td>03/13/2018</td>
-		    <td>04/01/2019</td>
-		    <td>04/01/2018</td>
-		    <td>2000.00</td>
-		  </tr>
-		</tbody>
-	      </table>
-            </div>
-	  </div>
-	</div>
+           <div class="container">
+           <table class="table table-striped" align="left">     
+            <thead>
+              <tr>
+                <th scope="col">Signed</th>
+                <th scope="col">L/T</th>
+                <th scope="col">Contract ID</th>
+                <th scope="col">Contract Name</th>
+                <th scope="col">Tenant Name</th>
+                <th scope="col">Property ID</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Effective Date</th>
+                <th scope="col">Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="col">Y</td>
+                <td>L</td>
+                <td>01234567890123456789</td>
+                <td>MyRental In NYC</td>
+                <td>J Smith</td>
+                <td>12-AB-CD-DE-F1</td>
+                <td>03/13/2018</td>
+                <td>04/01/2019</td>
+                <td>04/01/2018</td>
+                <td>3000.00</td>
+              </tr>
+              <tr>
+                <td scope="col">Y</td>
+                <td>L</td>
+                <td>23456789012345678901</td>
+                <td>MyRental 42nd St</td>
+                <td>G Washington</td>
+                <td>12-AB-CD-DE-F2</td>
+                <td>06/15/2018</td>
+                <td>06/15/2019</td>
+                <td>06/15/2018</td>
+                <td>2500.00</td>
+              </tr>
+              <tr>
+                <td scope="col">N</td>
+                <td>T</td>
+                <td>01234567890123456789</td>
+                <td>My Condo In Austin</td>
+                <td>A Hamilton</td>
+                <td>12-AB-CD-DE-F1</td>
+                <td>03/13/2018</td>
+                <td>04/01/2019</td>
+                <td>04/01/2018</td>
+                <td>2000.00</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
       </div>
     </section>  
   </body>  
