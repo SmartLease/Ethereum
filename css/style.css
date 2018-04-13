@@ -501,8 +501,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #about .about-container .background {
-  min-height: 300px;
-  background: url(../img/about-img.jpg) center top no-repeat;
+  min-height: 400px;
+  background: url(../img/about-img.jpg) center no-repeat;
   margin-bottom: 10px;
 }
 
