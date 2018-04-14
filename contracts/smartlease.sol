@@ -41,11 +41,11 @@ contract SmartLease is Ownable {
     mapping (address => uint) public tenantAddressToId;
     mapping (address => bool) public tenantToSigned;
     uint public maxTenants = 1;
-    uint public numTenants;
-    uint public startDate;
-    uint public endDate;
-    uint public securityDeposit;
-    bytes32 public googlePropertyId;
+    uint public numTenants = 0;
+    uint public startDate = 0;
+    uint public endDate = 0;
+    uint public securityDeposit = 0;
+    bytes32 public googlePropertyId = '';
     bool isValid;
     bool isSigned;
 
