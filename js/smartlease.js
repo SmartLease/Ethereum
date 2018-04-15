@@ -1,4 +1,4 @@
-const FACTORYADDRESS = 'temp';
+const FACTORYADDRESS = '0x8f0483125fcb9aaaefa9209d8e9d7b9c8b9fb90f';
 const FACTORYABIPATH = 'build/contracts/SmartLeaseFactory.json';
 const SMARTLEASEABIPATH = 'build/contracts/SmartLease.json'
 
@@ -8,7 +8,7 @@ var SmartLease;
 var factoryInstance;
 
 
-let userAccount;
+var userAccount;
 
 
 /*
@@ -22,24 +22,27 @@ let userAccount;
 
 */
 
-$(function() {
-    checkForMetaMask()
-    .then(createFactory)
-    .then(connectToFactory)
-    .then(createSmartLease)
-    .then(getUserContracts)
-    .then(updateContractsTable)
-    .catch(handleError)
+$(function() { 
+    setTimeout(function() {
+        checkForMetaMask()
+        .then(createFactory)
+        .then(connectToFactory)
+        .then(createSmartLease)
+        .then(getUserContracts)
+        .then(updateContractsTable)
+        .catch(handleError)
+    }, 1000);
 });
 
 function checkForMetaMask() {
+    // console.log(web3);
     if (typeof web3 !== 'undefined') {
-        web3 = new Web3(web3.currentProvider);
+        // web3 = new Web3(web3.currentProvider);
         userAccount = web3.eth.accounts[0];
         setInterval(checkForUserAccountChange, 100);
-        return new Promise.resolve();
+        return Promise.resolve();
     } else {
-        return new Promise.reject(new Error("Please install MetaMask"));
+        return Promise.reject(new Error("Please install MetaMask"));
     }
 }
 
@@ -112,12 +115,17 @@ function updateContractsTable(_logs) {
     .then(function(leases) {
         leases.forEach(function(lease) {
             lease.then(function(leaseAttributes) {
+                let tr = $(document.createElement('tr'));
                 leaseAttributes.forEach(function(attribute) {
-                    
-                })
+                    tr.append(
+                        $(document.createElement('td'))
+                        .text(`${attribute[0]}: ${attribute[1]}`)
+                    );
+                });
+                tr.appendTo('tbody');
             })
         })
-    }
+    });
 }
 
 function connectToLease(_log) {
@@ -146,4 +154,8 @@ function genCbContractProperty(_method) {
         }
         return Promise.resolve([_method, result]);
     };
+}
+
+function handleError(err) {
+    console.error(err);
 }
