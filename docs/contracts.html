@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Smart Lease</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="SmartLease, ethereum, blockchain" name="keywords">
+    <meta content="SmartLease blockchain solution" name="description">
+    
+    <!-- Favicons -->
+    <link href="img/favicon.png" rel="icon">
+    <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Poppins:300,400,500,700" rel="stylesheet">
+    
+    <!-- Bootstrap CSS File -->
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Libraries CSS Files -->
+    <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    
+    <!-- Main Stylesheet File -->
+    <link href="css/contract_style.css" rel="stylesheet">
+  </head>
+  
+
+  <body>
+    
+<!--==========================
+	Header
+============================-->
+  <header id="header">
+    <div class="container">
+	   <div id="logo" class="pull-left">
+      <a href="#"><img src="img/logo.png" width="50px" alt="SmartLease Logo" title="SmartLease" /></a>
+	   </div>
+	      <nav id="nav-menu-container">
+          <ul class="nav-menu">
+            <li class="menu-active"><a href="index.html">Home</a></li>
+            <li><a href="index.html">About Us</a></li>
+	          <li><a href="index.html">Team</a></li>
+	          <li><a href="index.html">Contact Us</a></li>
+            
+	       </ul>
+        </nav><!-- #nav-menu-container -->
+    </div>
+  </header><!-- #header -->
+    
+    <!--==========================
+	Hero Section
+	============================-->
+  
+  <div class="text-left">
+    <button class="mybutton button1" data-toggle="modal" data-target="#contact_dialog">Create Contract</button>
+  </div>
+
+
+
+
+      <!-- Modal -->
+
+      <div class="modal fade bd-example-modal-lg" id="contact_dialog" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title" id="contact_dialog">Contract Form</h1>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="contact_form" action="/contract_form.php" method="POST">
+
+              <div class="modal-body">  
+              <label for="first name">First Name:</label>
+              <input type="name" class="form-control" id="firstname" placeholder="Enter First Name" name="first name" required></div>
+              
+              <div class="modal-body">
+              <label for="last name">Last Name:</label>
+              <input type="last name" class="form-control" id="lastname" placeholder="Enter Last Name" name="last name" required></div>
+
+              <div class="modal-body">
+              <label for="address">Address:</label>
+              <input type="Address" class="form-control" id="address" placeholder="Enter Address (include Apt.)" name="address" required></div>
+
+              <div class="modal-body">
+              <label for="city">City, State Zip:</label>
+              <input type="city" class="form-control" id="city" placeholder="Enter City, State Zip" name="city" required></div>
+
+              
+              <div class="modal-body"> 
+              <label for="country_name">Country : </label><input id="country_name" name="country_name" type="text" list="country" />
+              <datalist id="country">
+        
+              
+                 <option value="Afghanistan">
+                 <option value="Albania">
+                 <option value="Algeria">
+                 <option value="Andorra">
+                 <option value="Angola">
+                 <option value="Antigua & Deps">
+                 <option value="Argentina">
+                 <option value="Armenia">
+                 <option value="Australia">
+                 <option value="Austria">
+                 <option value="Azerbaijan">
+
+                 <option value="Bahamas">
+                 <option value="Bahrain">
+                 <option value="Bangladesh">
+                 <option value="Barbados">
+                 <option value="Belarus">
+                 <option value="Belgium">
+                 <option value="Belize">
+                 <option value="Benin">
+                 <option value="Bhutan">
+                 <option value="Bolivia">
+                 <option value="Bosnia and Herzegovina">
+                 <option value="Botswana">
+                 <option value="Brazil">
+                 <option value="Brunei">
+                 <option value="Bulgaria">
+                 <option value="Burkina Faso">
+                 <option value="Burundi">
+
+                 <option value="Cabo Verde">
+                 <option value="Cambodia">
+                 <option value="Cameroon">
+                 <option value="Canada">
+                 <option value="Central African Republic (CAR)">
+                 <option value="Chad">
+                 <option value="Chile">
+                 <option value="China">
+                 <option value="Colombia">
+                 <option value="Comoros">
+                 <option value="Democratic Republic of the Congo">
+                 <option value="Republic of the Congo">
+                 <option value="Costa Rica">
+                 <option value="Cote d'Ivoire">
+                 <option value="Croatia">
+                 <option value="Cuba">
+                 <option value="Cyprus">
+                 <option value="Czech Republic">
+
+                 <option value="Denmark">
+                 <option value="Djibouti">
+                 <option value="Dominica">
+                 <option value="Dominican Republic">
+
+                 <option value="Ecuador">
+                 <option value="Egypt">
+                 <option value="El Salvador">
+                 <option value="Equatorial Guinea">
+                 <option value="Eritrea">
+                 <option value="Estonia">
+                 <option value="Ethiopia">
+
+                 <option value="Fiji">
+                 <option value="Finland">
+                 <option value="France">
+
+                 <option value="Gabon">
+                 <option value="Gambia">
+                 <option value="Georgia">
+                 <option value="Germany">
+                 <option value="Ghana">
+                 <option value="Greece">
+                 <option value="Grenada">
+                 <option value="Guatemala">
+                 <option value="Guinea">
+                 <option value="Guinea-Bissau">
+                 <option value="Guyana">
+
+                 <option value="Haiti">
+                 <option value="Honduras">
+                 <option value="Hungary">
+
+                 <option value="Iceland">
+                 <option value="India">
+                 <option value="Indonesia">
+                 <option value="Iran">
+                 <option value="Iraq">
+                 <option value="Ireland">
+                 <option value="Israel">
+                 <option value="Italy">
+
+                 <option value="Jamaica">
+                 <option value="Japan">
+                 <option value="Jordan">
+
+                 <option value="Kazakhstan">
+                 <option value="Kenya">
+                 <option value="Kiribati">
+                 <option value="Kosovo">
+                 <option value="Kuwait">
+                 <option value="Kyrgyzstan">
+
+                 <option value="Laos">
+                 <option value="Latvia">
+                 <option value="Lebanon">
+                 <option value="Lesotho">
+                 <option value="Liberia">
+                 <option value="Libya">
+                 <option value="Liechtenstein">
+                 <option value="Lithuania">
+                 <option value="Luxembourg">
+
+                 <option value="Macedonia (FYROM)">
+                 <option value="Madagascar">
+                 <option value="Malawi">
+                 <option value="Malaysia">
+                 <option value="Maldives">
+                 <option value="Mali">
+                 <option value="Malta">
+                 <option value="Marshall Islands">
+                 <option value="Mauritania">
+                 <option value="Mauritius">
+                 <option value="Mexico">
+                 <option value="Micronesia">
+                 <option value="Moldova">
+                 <option value="Monaco">
+                 <option value="Mongolia">
+                 <option value="Montenegro">
+                 <option value="Morocco">
+                 <option value="Mozambique">
+                 <option value="Myanmar (Burma)">
+
+                 <option value="Namibia">
+                 <option value="Nauru">
+                 <option value="Nepal">
+                 <option value="Netherlands">
+                 <option value="New Zealand">
+                 <option value="Nicaragua">
+                 <option value="Niger">
+                 <option value="Nigeria">
+                 <option value="North Korea">
+                 <option value="Norway">
+
+                 <option value="Oman">
+
+                 <option value="Pakistan">
+                 <option value="Palau">
+                 <option value="Palestine">
+                 <option value="Panama">
+                 <option value="Papua New Guinea">
+                 <option value="Paraguay">
+                 <option value="Peru">
+                 <option value="Philippines">
+                 <option value="Poland">
+                 <option value="Portugal">
+
+                 <option value="Qatar">
+
+                 <option value="Romania">
+                 <option value="Russia">
+                 <option value="Rwanda">
+
+                 <option value="Saint Kitts and Nevis">
+                 <option value="Saint Lucia">
+                 <option value="Saint Vincent and the Grenadines">
+                 <option value="Samoa">
+                 <option value="San Marino">
+                 <option value="Sao Tome and Principe">
+                 <option value="Saudi Arabia">
+                 <option value="Senegal">
+                 <option value="Serbia">
+                 <option value="Seychelles">
+                 <option value="Sierra Leone">
+                 <option value="Singapore">
+                 <option value="Slovakia">
+                 <option value="Slovenia">
+                 <option value="Solomon Islands">
+                 <option value="Somalia">
+                 <option value="South Africa">
+                 <option value="South Korea">
+                 <option value="South Sudan">
+                 <option value="Spain">
+                 <option value="Sri Lanka">
+                 <option value="Sudan">
+                 <option value="Suriname">
+                 <option value="Swaziland">
+                 <option value="Sweden">
+                 <option value="Switzerland">
+                 <option value="Syria">
+
+
+                 <option value="Taiwan">
+                 <option value="Tajikistan">
+                 <option value="Tanzania">
+                 <option value="Thailand">
+                 <option value="Timor-Leste">
+                 <option value="Togo">
+                 <option value="Tonga">
+                 <option value="Trinidad and Tobago">
+                 <option value="Tunisia">
+                 <option value="Turkey">
+                 <option value="Turkmenistan">
+                 <option value="Tuvalu">
+
+                 <option value="Uganda">
+                 <option value="Ukraine">
+                 <option value="United Arab Emirates (UAE)">
+                 <option value="United Kingdom (UK)">
+                 <option value="United States of America (USA)">
+                 <option value="Uruguay">
+                 <option value="Uzbekistan">
+
+                 <option value="Vanuatu">
+                 <option value="Vatican City (Holy See)">
+                 <option value="Venezuela">
+                 <option value="Vietnam">
+
+                 <option value="Yemen">
+
+                 <option value="Zambia">
+                 <option value="Zimbabwe">
+
+              </datalist></div>
+
+              <div class="modal-body">
+              <label for="numtenant">Max Number of Tenants:</label>
+              <input type="number" class="form-control" id="start" placeholder="Enter Maximum Number of Tenants" name="quantity" min="1" max="10" required></div>
+              
+              <div class="modal-body">
+              <label for="start">Start Date:</label>
+              <input type="date" class="form-control" id="start" placeholder="Enter Start Date" name="start" required></div>
+
+              <div class="modal-body">
+              <label for="end">End Date:</label>
+              <input type="date" class="form-control" id="end" placeholder="Enter End Date" name="end" required></div>
+
+              <div class="modal-body">
+              <label for="email">Email:</label>
+              <input type="email" class="form-control" id="end" placeholder="Enter Email address" name="email" required></div>
+
+              <div class="modal-body">
+              <label for="email">Comments:</label></br>
+              <textarea rows="4" cols="50" name="comment" form="usrform"></textarea></div>
+
+
+
+
+                        
+              </form> 
+            </div>
+             
+              <div class="text-center">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Submit<i class="fa fa-paper-plane-o ml-1"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+         
+
+
+
+    <section id="about">
+      <div class="container">
+        <div class="row about-container">
+          <div class="col-lg-6 content order-lg-1 order-2">
+           <div class="container">
+           <table class="table table-striped" align="left">     
+            <thead>
+              <tr>
+                <th scope="col">Signed</th>
+                <th scope="col">L/T</th>
+                <th scope="col">Contract ID</th>
+                <th scope="col">Contract Name</th>
+                <th scope="col">Tenant Name</th>
+                <th scope="col">Property ID</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Effective Date</th>
+                <th scope="col">Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="col">Y</td>
+                <td>L</td>
+                <td>01234567890123456789</td>
+                <td>MyRental In NYC</td>
+                <td>J Smith</td>
+                <td>12-AB-CD-DE-F1</td>
+                <td>03/13/2018</td>
+                <td>04/01/2019</td>
+                <td>04/01/2018</td>
+                <td>3000.00</td>
+              </tr>
+              <tr>
+                <td scope="col">Y</td>
+                <td>L</td>
+                <td>23456789012345678901</td>
+                <td>MyRental 42nd St</td>
+                <td>G Washington</td>
+                <td>12-AB-CD-DE-F2</td>
+                <td>06/15/2018</td>
+                <td>06/15/2019</td>
+                <td>06/15/2018</td>
+                <td>2500.00</td>
+              </tr>
+              <tr>
+                <td scope="col">N</td>
+                <td>T</td>
+                <td>01234567890123456789</td>
+                <td>My Condo In Austin</td>
+                <td>A Hamilton</td>
+                <td>12-AB-CD-DE-F1</td>
+                <td>03/13/2018</td>
+                <td>04/01/2019</td>
+                <td>04/01/2018</td>
+                <td>2000.00</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+      </div>
+    </section>  
+  </body>  
+  <!--- MENU-CONTRACTS END -->
+  <!--- MENU-HELP START -->
+  <!--==========================
+      Footer
+      ============================-->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container"></div>
+    </div>
+    
+    <div class="container">
+      <div class="copyright">
+        Copyright &copy; 2018 <strong>Smart Lease</strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!--
+            All the links in the footer should remain intact.
+            You can delete the links only if you purchased the pro version.
+            Licensing information: https://bootstrapmade.com/license/
+            Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Regna
+          -->
+        Bootstrap Templates by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- #footer -->
+  
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+  
+  <!-- JavaScript Libraries -->
+  <script src="lib/jquery/jquery.min.js"></script>
+  <script src="lib/jquery/jquery-migrate.min.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="lib/easing/easing.min.js"></script>
+  <script src="lib/wow/wow.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8HeI8o-c1NppZA-92oYlXakhDPYR7XMY"></script>
+  
+  <script src="lib/waypoints/waypoints.min.js"></script>
+  <script src="lib/counterup/counterup.min.js"></script>
+  <script src="lib/superfish/hoverIntent.js"></script>
+  <script src="lib/superfish/superfish.min.js"></script>
+  
+  <!-- Contact Form JavaScript File -->
+  <script src="contactform/contactform.js"></script>
+  
+  <!-- Template Main Javascript File -->
+  <script src="js/main.js"></script>
+
+   <!-- SmartLease UI interaction -->
+   <script src="js/smartlease.js"></script>
+</html>
