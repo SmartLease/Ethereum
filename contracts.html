@@ -50,8 +50,13 @@
 	Hero Section
 	============================-->
   
-    <div class="text-left">
-      <button class="mybutton button1" data-toggle="modal" data-target="#contact_dialog">Create Contract</button>
+    <!-- Seems to need container and member class for the button to be centered-->
+    <div class="container">&nbsp</div>
+    <div class="member">&nbsp</div>
+    <div class="form-row text-center">
+      <div class="col-12">
+	<button class="btn mybutton button1" data-toggle="modal" data-target="#contact_dialog">Create Contract</button>
+      </div>
     </div>
 
     <!-- Modal -->
@@ -348,6 +353,7 @@
           <div class="text-center">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary">Submit<i class="fa fa-paper-plane-o ml-1"></i></button>
+	    <br><br>
           </div>
         </div>
       </div>
