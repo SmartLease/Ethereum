@@ -1,6 +1,6 @@
 const FactoryAddress = '0x8f0483125fcb9aaaefa9209d8e9d7b9c8b9fb90f';
-const FactoryURI = '../build/contracts/SmartLeaseFactory.json';
-const SmartLeaseURI = '../build/contracts/SmartLease.json';
+const FactoryURI = 'build/contracts/SmartLeaseFactory.json';
+const SmartLeaseURI = 'build/contracts/SmartLease.json';
 
 var web3js;
 
@@ -39,7 +39,7 @@ function getContractABI(uri) {
     return new Promise((resolve, reject) => {
         $.getJSON(uri)
         .done(json => {return resolve(json.abi)})
-        .fail((xhr, status, err) => {return reject(err)});
+        .fail((xhr, status, err) => {console.log(xhr, status, err); return reject(err)});
     });
 }
 
