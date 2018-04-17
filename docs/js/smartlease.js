@@ -1,6 +1,6 @@
 const FactoryAddress = '0x8f0483125fcb9aaaefa9209d8e9d7b9c8b9fb90f';
-const FactoryURI = 'build/contracts/SmartLeaseFactory.json';
-const SmartLeaseURI = 'build/contracts/SmartLease.json';
+const FactoryURI = '../build/contracts/SmartLeaseFactory.json';
+const SmartLeaseURI = '../build/contracts/SmartLease.json';
 
 var web3js;
 
