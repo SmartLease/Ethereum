@@ -1,4 +1,6 @@
-
+.pac-container {
+  z-index:2000 !important;
+}
 
 /*--------------------------------------------------------------
 # Navigation Menu
