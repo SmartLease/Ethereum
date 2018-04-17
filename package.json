@@ -7,7 +7,8 @@
     "test": "test"
   },
   "dependencies": {
-    "npm": "^5.8.0",
+    "ethjs": "^0.3.6",
+    "web3": "1.0.0-beta.34",
     "zeppelin-solidity": "^1.8.0"
   },
   "devDependencies": {},

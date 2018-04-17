@@ -46,8 +46,8 @@ contract SmartLease is Ownable {
     uint public endDate = 0;
     uint public securityDeposit = 0;
     bytes32 public googlePropertyId = '';
-    bool isValid;
-    bool isSigned;
+    bool public isValid;
+    bool public isSigned;
 
     modifier beforeSigning() {
         require(isSigned == false);

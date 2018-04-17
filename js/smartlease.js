@@ -1,15 +1,10 @@
-const FACTORYADDRESS = '0x8f0483125fcb9aaaefa9209d8e9d7b9c8b9fb90f';
-const FACTORYABIPATH = 'build/contracts/SmartLeaseFactory.json';
-const SMARTLEASEABIPATH = 'build/contracts/SmartLease.json'
+const FactoryAddress = '0x8f0483125fcb9aaaefa9209d8e9d7b9c8b9fb90f';
+const FactoryURI = 'build/contracts/SmartLeaseFactory.json';
+const SmartLeaseURI = 'build/contracts/SmartLease.json';
 
-var SmartLeaseFactory;
-var SmartLease;
-
-var factoryInstance;
-
+var web3js;
 
 var userAccount;
-
 
 /*
 
@@ -22,140 +17,94 @@ var userAccount;
 
 */
 
-$(function() { 
-    setTimeout(function() {
-        checkForMetaMask()
-        .then(createFactory)
-        .then(connectToFactory)
-        .then(createSmartLease)
-        .then(getUserContracts)
-        .then(updateContractsTable)
-        .catch(handleError)
-    }, 1000);
+$(function() {
+    checkForMetaMask()
+    .then(loadContracts)
+    .then(startUpdateLoop)
+    .catch(dispError)
 });
 
+
 function checkForMetaMask() {
-    // console.log(web3);
-    if (typeof web3 !== 'undefined') {
-        // web3 = new Web3(web3.currentProvider);
-        userAccount = web3.eth.accounts[0];
-        setInterval(checkForUserAccountChange, 100);
-        return Promise.resolve();
-    } else {
-        return Promise.reject(new Error("Please install MetaMask"));
-    }
-}
-
-function checkForUserAccountChange() {
-    if (web3.eth.accounts[0] !== userAccount) {
-        userAccount = web3.eth.accounts[0];
-    }
-}
-
-function createFactory() {
-    return createContract(FACTORYABIPATH)
-    .then(function(_abi) {
-        SmartLeaseFactory = new web3.eth.contract(_abi);
-        return Promise.resolve(SmartLeaseFactory);
+    return new Promise((resolve, reject) => {
+        if (typeof web3 === 'undefined') {
+            return reject(new Error("Please install MetaMask. If MetaMask is already installed please unlock your accounts."));
+        }
+        web3js = new Web3(web3.currentProvider);
+        return resolve();
     });
 }
 
-function createSmartLease() {
-    return createContract(SMARTLEASEABIPATH)
-    .then(function(_abi) {
-        SmartLease = new web3.eth.contract(_abi);
-        return Promise.resolve(SmartLease);
+function getContractABI(uri) {
+    return new Promise((resolve, reject) => {
+        $.getJSON(uri)
+        .done(json => {return resolve(json.abi)})
+        .fail((xhr, status, err) => {return reject(err)});
     });
 }
 
-function createContract(_abiPath) {
-    return getContractABI(_abiPath);
+function loadContracts() {
+    let abiFactory = getContractABI(FactoryURI);
+    let abiSmartLease = getContractABI(SmartLeaseURI);
+    return Promise.all([abiFactory, abiSmartLease])
+    .then((abis) => {
+        Factory = new web3js.eth.Contract(abis[0], FactoryAddress);
+        SmartLease = new web3js.eth.Contract(abis[1]); // No address yet. To be cloned and have address added later.
+    });
 }
 
-function connectToFactory(_contract) {
-    factoryInstance = connectToContract(_contract, FACTORYADDRESS);
-    return Promise.resolve();
+function startUpdateLoop() {
+    checkUser();
+    setInterval(checkUser, 5000);
 }
 
-function connectToContract(_contract, _address) {
-    return _contract.at(_address);
+function checkUser() {
+    web3js.eth.getAccounts()
+    .then(accts => {
+        if (userAccount !== accts[0]) {
+            userAccount = accts[0];
+            updateUI();
+        }
+    });
 }
 
-function getContractABI(_abiPath) {
-    return $.getJSON(_abiPath)
-    .then(function(_abi) {
-        return Promise.resolve(_abi);
+function updateUI() {
+    $('tbody').empty();
+    Factory.getPastEvents('NewLease', {filter: {landlord: userAccount}, fromBlock: 0, toBlock: 'latest'})
+    .then((logs) => {
+        return logs.map((log) => log.returnValues.contract_address);
     })
-    .catch(function(err) {
-        throw new Error("Could not connect to factory:" + err);
-    });
-}
-
-function getUserContracts(_userAccount) {
-    return getAllEventsByUserAccount(_userAccount)
-}
-
-function getAllEventsByUserAccount(_userAccount) {
-    let newUserLeases = factoryContract.newLease({landlord: _userAccount}, {fromBlock: 0, toBlock: 'latest'});
-    return new Promise(function(resolve, reject) {
-        newUserLeases.get(function(err, logs) {
-            if (err) {
-                reject(err);
-            }
-            resolve(logs);
-        })
-    });
-}
-
-function updateContractsTable(_logs) {
-    if (_logs.length == 0) {
-        return new Promise.reject(new Error("No contracts associated with current user"));
-    }
-    return Promise.all(_logs.map(connectToLease))
-    .then(function(leases) {
-        leases.forEach(function(lease) {
-            lease.then(function(leaseAttributes) {
-                let tr = $(document.createElement('tr'));
-                leaseAttributes.forEach(function(attribute) {
-                    tr.append(
-                        $(document.createElement('td'))
-                        .text(`${attribute[0]}: ${attribute[1]}`)
-                    );
-                });
-                tr.appendTo('tbody');
+    .then((addresses) => {
+        addresses.forEach((address) => {
+            let smartlease = SmartLease.clone();
+            smartlease.options.address = address;
+            methods = [
+                'landlord',
+                'numTenants',
+                'maxTenants',
+                'startDate',
+                'endDate',
+                'securityDeposit',
+                'googlePropertyId',
+                // 'isValid',
+                // 'isSigned'
+            ];
+            let tr = $(document.createElement('tr'));
+            Promise.all(methods.map((method) => {
+                return smartlease.methods[method + '()']().call();
+            }))
+            .then((results) => {
+                results.forEach(text => tr.append($(`<td>${text}</td>`)));
             })
-        })
-    });
-}
-
-function connectToLease(_log) {
-    let leaseInstance = SmartLease.at(_log.args.contract_address);
-    return Promise.all([
-        'landlord',
-        'numTenants',
-        'maxTenants',
-        'startDate',
-        'endDate',
-        'securityDeposit',
-        'googlePropertyId',
-        'isValid',
-        'isSigned'
-    ].map(function(method) {
-        return new Promise(function(resolve, reject) {
-            leaseInstance[method].call(genCbContractProperty(method));
+            .then(() => {
+                tr.appendTo('tbody');                
+            })
+            .catch(dispError);
         });
     })
-)}
-
-function genCbContractProperty(_method) {
-    return function(err, result) {
-        if (err) {
-            return Promise.reject(new Error("Could not get property: " + err));
-        }
-        return Promise.resolve([_method, result]);
-    };
+    .catch(dispError);
 }
 
-function handleError(err) {
-    console.error(err);
+function dispError(error) {
+    console.log(error);
 }
