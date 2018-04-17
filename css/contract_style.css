@@ -731,8 +731,17 @@ body.mobile-nav-active #mobile-nav-toggle {
 /*--------------------------------------------------------------
 # Table
 --------------------------------------------------------------*/
+.table {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.table th {
+  text-align: center;
+}
+
 .table td {
-   text-align: center;   
+  text-align: center;
 }
 
 /*--------------------------------------------------------------
