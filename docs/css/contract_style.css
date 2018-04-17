@@ -1,4 +1,6 @@
-
+.pac-container {
+  z-index:2000 !important;
+}
 
 /*--------------------------------------------------------------
 # Navigation Menu
@@ -724,6 +726,22 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #contact .form button[type="submit"]:hover {
   background: #51d8ad;
+}
+
+/*--------------------------------------------------------------
+# Table
+--------------------------------------------------------------*/
+.table {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.table th {
+  text-align: center;
+}
+
+.table td {
+  text-align: center;
 }
 
 /*--------------------------------------------------------------
