@@ -47,6 +47,9 @@
       </div>
     </header><!-- #header -->
     
+    <!--==========================
+	Hero Section
+	============================-->
   
     <!-- Seems to need container and member class for the button to be centered-->
     <div class="container">&nbsp</div>
@@ -57,7 +60,7 @@
       </div>
     </div>
 
-    <!-- Modal Create Contract Interface -->
+    <!-- Modal -->
 
     <div class="modal fade bd-example-modal-lg" id="contact_dialog" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
@@ -101,7 +104,11 @@
               <div class="modal-body">
                 <label for="Femail">Email:</label>
                 <input type="email" class="form-control" id="Femail" placeholder="Enter Email address" name="email" required>
-              </div>      
+              </div>
+              <div class="modal-body">
+                <label for="Fcomments">Comments:</label></br>
+                <textarea rows="4" cols="50" id="Fcomments" name="comment" form="usrform"></textarea>
+              </div>          
             </form> 
           </div>
              
@@ -122,7 +129,7 @@
         <div class="row about-container">
           <div class="container">
 	          <p align="center">
-              <table id="contract-table" class="table table-striped table-hover" margin="0px auto">     
+              <table id="landlord-table" class="table table-striped table-hover" margin="0px auto">     
                 <thead>
                   <tr>
                     <th id="item" scope="col">#</th>
@@ -137,44 +144,7 @@
                     <th id="secDeposit" scope="col">Security Deposit</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <!-- <tr>
-                    <td scope="row">1</td>
-                    <td>Y</td>
-                    <td>Y</td>
-                    <td>Alexander Hamilton</td>
-                    <td>2</td>
-                    <td>4</td>
-                    <td>Washington Hts Apt</td>
-                    <td>03/01/2018</td>
-                    <td>04/01/2019</td>
-                    <td>$3,000</td>
-                  </tr>
-                  <tr>
-                    <td scope="row">2</td>
-                    <td>Y</td>
-                    <td>N</td>
-                    <td>George Washington</td>
-                    <td>1</td>
-                    <td>5</td>
-                    <td>White House</td>
-                    <td>04/01/2018</td>
-                    <td>05/01/2019</td>
-                    <td>$4,000</td>
-                  </tr>
-                  <tr>
-                    <td scope="row">3</td>
-                    <td>Y</td>
-                    <td>Y</td>
-                    <td>Abraham Lincoln</td>
-                    <td>4</td>
-                    <td>6</td>
-                    <td>Springfield Condos</td>
-                    <td>06/01/2018</td>
-                    <td>06/30/2019</td>
-                    <td>$1,500</td>
-                  </tr> -->
-                </tbody>
+                <tbody></tbody> <!-- landlord contracts here -->
               </table>
               <div id="no-contracts-alert" class="alert alert-info mt-2" role="alert " style="display: none;">
                 <h5 class="alert-heading">No SmartLeases owned by current user!</h5>
@@ -183,7 +153,30 @@
               </div>
             </p>
           </div>
-	      </div>
+        </div>
+        <div>
+          <div class="container">
+	          <p align="center">
+              <table id="tenant-table" class="table table-striped table-hover" margin="0px auto">     
+                <thead>
+                  <tr>
+                    <th id="item" scope="col">#</th>
+                    <th id="isValid" scope="col">Valid</th>
+                    <th id="isSigned" scope="col">Signed</th>
+                    <th id="landlord" scope="col">Landlord</th>
+                    <th id="tenants" scope="col"># Tenants</th>
+                    <th id="tenantsMax" scope="col">Max Tenants</th>
+                    <th id="contractName" scope="col">Contract Name</th>
+                    <th id="startDate" scope="col">Start Date</th>
+                    <th id="endDate" scope="col">End Date</th>
+                    <th id="secDeposit" scope="col">Security Deposit</th>
+                  </tr>
+                </thead>
+                <tbody></tbody> <!-- tenant contracts here -->
+              </table>
+            </p>  
+          </div>
+        </div>
       </div>
     </section>  
   </body>  

@@ -5,9 +5,9 @@ import "zeppelin-solidity/contracts/ECRecovery.sol";
 
 contract DateTimeAPI {
     /*
-    *  Abstract contract for interfacing with the DateTime contract.
-    *  See: https://github.com/pipermerriam/ethereum-datetime/blob/master/contracts/DateTime.sol
-    */
+     *  Abstract contract for interfacing with the DateTime contract.
+     *  See: https://github.com/pipermerriam/ethereum-datetime/blob/master/contracts/DateTime.sol
+     */
     function isLeapYear(uint16 year) public pure returns (bool);
     function getYear(uint timestamp) public pure returns (uint16);
     function getMonth(uint timestamp) public pure returns (uint8);
@@ -22,10 +22,16 @@ contract DateTimeAPI {
     function toTimestamp(uint16 year, uint8 month, uint8 day, uint8 hour, uint8 minute, uint8 second) public pure returns (uint timestamp);
 }
 
+contract FactoryAPI {
+    /*
+     *   Abstract contract to allow SmartLease to emit a NewTenant event in the factory.
+     */
+    function emitNewTenant(address _contract_address, address _tenant) public;
+}
+
 contract SmartLease is Ownable {
 
     event NewSmartLease(address indexed landlord);
-    event NewTenant(string firstName, string lastName);
     event ApproveSmartLease(address indexed tenant);
 
     struct Person {
@@ -33,8 +39,10 @@ contract SmartLease is Ownable {
         string lastName;
     }
 
-    address dtContract = 0; // main chain address: 0x1a6184CD4C5Bea62B0116de7962EE7315B7bcBce;
-    DateTimeAPI DateTime = DateTimeAPI(dtContract);
+    address dateTimeAddr = 0; // main chain address: 0x1a6184CD4C5Bea62B0116de7962EE7315B7bcBce;
+    DateTimeAPI DateTime = DateTimeAPI(dateTimeAddr);
+
+    address public factoryAddr;
 
     Person public landlord;
     Person[] public tenants;
@@ -45,7 +53,7 @@ contract SmartLease is Ownable {
     uint public startDate = 0;
     uint public endDate = 0;
     uint public securityDeposit = 0;
-    bytes32 public googlePropertyId = '';
+    string public googlePropertyId = "";
     bool public isValid;
     bool public isSigned;
 
@@ -68,7 +76,7 @@ contract SmartLease is Ownable {
     function SmartLease(string _firstName, string _lastName) public {
         landlord.firstName = _firstName;
         landlord.lastName = _lastName;
-        emit NewSmartLease(owner);
+        factoryAddr = msg.sender;
     }
 
     function setMaxTenants(uint _maxTenants) public onlyOwner beforeSigning {
@@ -76,18 +84,19 @@ contract SmartLease is Ownable {
         maxTenants = _maxTenants;
     }
 
-    function addTenant(string _firstName, string _lastName) public onlyOwner beforeSigning {
+    function addTenant(string _firstName, string _lastName, address _tenantAddr) public onlyOwner beforeSigning {
         require(numTenants < maxTenants);
         tenants.push(Person(_firstName, _lastName));
-        numTenants++;
-        emit NewTenant(_firstName, _lastName);
+        tenantAddressToId[_tenantAddr] = numTenants++;
+        FactoryAPI factory = FactoryAPI(factoryAddr);
+        factory.emitNewTenant(this, _tenantAddr);
     }
 
-    function setStartDate(uint16 _year, uint8 _month, uint8 _day) public onlyOwner beforeSigning dateTimeAddressValid(dtContract) {
+    function setStartDate(uint16 _year, uint8 _month, uint8 _day) public onlyOwner beforeSigning dateTimeAddressValid(dateTimeAddr) {
         startDate = DateTime.toTimestamp(_year, _month, _day);
     }
 
-    function setEndDate(uint16 _year, uint8 _month, uint8 _day) public onlyOwner beforeSigning dateTimeAddressValid(dtContract) {
+    function setEndDate(uint16 _year, uint8 _month, uint8 _day) public onlyOwner beforeSigning dateTimeAddressValid(dateTimeAddr) {
         endDate = DateTime.toTimestamp(_year, _month, _day);
     }
 
@@ -95,7 +104,7 @@ contract SmartLease is Ownable {
         securityDeposit = _securityDepositAmount;
     }
 
-    function setGooglePropertyId(bytes32 _googlePropertyId) public onlyOwner beforeSigning {
+    function setGooglePropertyId(string _googlePropertyId) public onlyOwner beforeSigning {
         googlePropertyId = _googlePropertyId;
     }
 }

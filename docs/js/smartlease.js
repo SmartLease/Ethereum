@@ -1,4 +1,4 @@
-const FactoryAddress = '0x8f0483125fcb9aaaefa9209d8e9d7b9c8b9fb90f';
+const FactoryAddress = '0x345ca3e014aaf5dca488057592ee47305d9b3e10';
 const FactoryURI = 'build/contracts/SmartLeaseFactory.json';
 const SmartLeaseURI = 'build/contracts/SmartLease.json';
 
@@ -78,9 +78,6 @@ function checkUser() {
     });
 }
 
-const getSmartLeaseDataForLandlord = getSmartLeaseData('#landlord-table tbody');
-const getSmartLeaseDataForTenant = getSmartLeaseData('#tenant-table tbody');
-
 function updateTenantsTable() {
     $('#tenant-table tbody').empty();
     Factory.getPastEvents('NewTenant', {filter: {tenant: userAccount}, fromBlock: 0, toBlock: 'latest'})
@@ -93,7 +90,7 @@ function updateTenantsTable() {
         return logs.map((log) => log.returnValues.contract_address);
     })
     .then((addresses) => {
-        addresses.forEach(getSmartLeaseData('#tenant-table tbody'));
+        addresses.forEach(getSmartLeaseDataForTenant);
     });
 }
 
@@ -109,13 +106,16 @@ function updateLandordTable() {
         return logs.map((log) => log.returnValues.contract_address);
     })
     .then((addresses) => {
-        addresses.forEach(getSmartLeaseData('#landlord-table tbody'));
+        addresses.forEach(getSmartLeaseDataForLandlord);
     });
 }   
 
 function dispError(error) {
     console.log(error);
 }
+
+getSmartLeaseDataForLandlord = getSmartLeaseData('#landlord-table tbody');
+getSmartLeaseDataForTenant = getSmartLeaseData('#tenant-table tbody');
 
 function getSmartLeaseData(table_id_name) {
     return function(address) {
