@@ -28,7 +28,16 @@ $(function() {
 function checkForMetaMask() {
     return new Promise((resolve, reject) => {
         if (typeof web3 === 'undefined') {
-            return reject(new Error("Please install MetaMask. If MetaMask is already installed please unlock your accounts."));
+            $('#create-contract').prepend(
+                $(
+                `<div class="alert alert-warning ml-5 mr-5" role="alert">
+                <h5 class="alert-heading">MetaMask is required for this site and was not detected. To install MetaMask for your browser follow <a href="https://metamask.io/" target="_blank" class="alert-link">this link</a>.</h5>
+                <hr>
+                <p>If MetaMask is already installed please sign into your account.</p>
+                </div>`
+                )
+            )
+            return reject(new Error("MetaMask not detected"));
         }
         web3js = new Web3(web3.currentProvider);
         return resolve();
@@ -43,7 +52,7 @@ function getContractABI(uri) {
     });
 }
 
-function loadContracts() {
+function loadContracts() { // Where user is "landlord"
     let abiFactory = getContractABI(FactoryURI);
     let abiSmartLease = getContractABI(SmartLeaseURI);
     return Promise.all([abiFactory, abiSmartLease])
@@ -55,7 +64,7 @@ function loadContracts() {
 
 function startUpdateLoop() {
     checkUser();
-    setInterval(checkUser, 5000);
+    setInterval(checkUser, 2000);
 }
 
 function checkUser() {
@@ -69,9 +78,14 @@ function checkUser() {
 }
 
 function updateUI() {
-    $('tbody').empty();
+    $('#contract-table tbody').empty();
     Factory.getPastEvents('NewLease', {filter: {landlord: userAccount}, fromBlock: 0, toBlock: 'latest'})
     .then((logs) => {
+        if (logs.length === 0) {
+            $('#no-contracts-alert').show();
+            return Promise.reject();
+        }
+        $('#no-contracts-alert').hide();
         return logs.map((log) => log.returnValues.contract_address);
     })
     .then((addresses) => {
