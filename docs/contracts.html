@@ -75,11 +75,11 @@
             <form id="contact_form" action="/contract_form.php" method="POST">
 	            <div class="modal-body">  
                 <label for="first name">First Name:</label>
-                <input type="name" class="form-control" id="firstname" placeholder="Enter First Name" name="first name" required>
+                <input type="name" class="form-control" id="first_name" placeholder="Enter First Name" name="first name" required>
 	            </div>
               <div class="modal-body">
                 <label for="last name">Last Name:</label>
-                <input type="last name" class="form-control" id="lastname" placeholder="Enter Last Name" name="last name" required>
+                <input type="last name" class="form-control" id="last_name" placeholder="Enter Last Name" name="last name" required>
               </div>
               <div class="modal-body">
                 <label for="address">Address:</label>
@@ -91,24 +91,20 @@
               </div>
               <div class="modal-body">
                 <label for="FmaxTenant">Max Number of Tenants:</label>
-                <input type="number" class="form-control" id="FmaxTenant" placeholder="Enter Maximum Number of Tenants" name="quantity" min="1" max="10" required>
+                <input type="number" class="form-control" id="max_tenant" placeholder="Enter Maximum Number of Tenants" name="quantity" min="1" max="10" required>
               </div>
               <div class="modal-body">
                 <label for="FstartDate">Start Date:</label>
-                <input type="date" class="form-control" id="FstartDate" placeholder="Enter Start Date" name="start" required>
+                <input type="date" class="form-control" id="start_date" placeholder="Enter Start Date" name="start" required>
               </div>
               <div class="modal-body">
                 <label for="FendDate">End Date:</label>
-                <input type="date" class="form-control" id="endDate" placeholder="Enter End Date" name="end" required>
+                <input type="date" class="form-control" id="end_date" placeholder="Enter End Date" name="end" required>
               </div>
               <div class="modal-body">
                 <label for="Femail">Email:</label>
-                <input type="email" class="form-control" id="Femail" placeholder="Enter Email address" name="email" required>
-              </div>
-              <div class="modal-body">
-                <label for="Fcomments">Comments:</label></br>
-                <textarea rows="4" cols="50" id="Fcomments" name="comment" form="usrform"></textarea>
-              </div>          
+                <input type="email" class="form-control" id="email" placeholder="Enter Email address" name="email" required>
+              </div>        
             </form> 
           </div>
              
@@ -116,7 +112,7 @@
             <div class="text-center">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 	      &nbsp;&nbsp;&nbsp;&nbsp;
-              <button type="button" class="btn btn-primary">Submit<i class="fa fa-paper-plane-o ml-1"></i></button>
+              <button type="button" class="btn btn-primary" onclick="validate()">Submit<i class="fa fa-paper-plane-o ml-1"></i></button>
 	            <br><br>
             </div>
 	        </div>
@@ -235,4 +231,6 @@
   <!-- Google Places API -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwX5hiiWlEoRwPZlVoENRLSng5xMs_t4Q&libraries=places&callback=initAutocomplete"
        async defer></script>
+
+  <script src="js/validate_contract.js"></script>
 </html>
