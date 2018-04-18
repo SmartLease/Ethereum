@@ -72,53 +72,76 @@ function checkUser() {
     .then(accts => {
         if (userAccount !== accts[0]) {
             userAccount = accts[0];
-            updateUI();
+            updateLandordTable();
+            updateTenantsTable();
         }
     });
 }
 
-function updateUI() {
-    $('#contract-table tbody').empty();
-    Factory.getPastEvents('NewLease', {filter: {landlord: userAccount}, fromBlock: 0, toBlock: 'latest'})
+const getSmartLeaseDataForLandlord = getSmartLeaseData('#landlord-table tbody');
+const getSmartLeaseDataForTenant = getSmartLeaseData('#tenant-table tbody');
+
+function updateTenantsTable() {
+    $('#tenant-table tbody').empty();
+    Factory.getPastEvents('NewTenant', {filter: {tenant: userAccount}, fromBlock: 0, toBlock: 'latest'})
     .then((logs) => {
         if (logs.length === 0) {
-            $('#no-contracts-alert').show();
+            $('#not-tenant-alert').show();
             return Promise.reject();
         }
-        $('#no-contracts-alert').hide();
+        $('#not-tenant-alert').hide();
         return logs.map((log) => log.returnValues.contract_address);
     })
     .then((addresses) => {
-        addresses.forEach((address) => {
-            let smartlease = SmartLease.clone();
-            smartlease.options.address = address;
-            methods = [
-                'landlord',
-                'numTenants',
-                'maxTenants',
-                'startDate',
-                'endDate',
-                'securityDeposit',
-                'googlePropertyId',
-                // 'isValid',
-                // 'isSigned'
-            ];
-            let tr = $(document.createElement('tr'));
-            Promise.all(methods.map((method) => {
-                return smartlease.methods[method + '()']().call();
-            }))
-            .then((results) => {
-                results.forEach(text => tr.append($(`<td>${text}</td>`)));
-            })
-            .then(() => {
-                tr.appendTo('tbody');                
-            })
-            .catch(dispError);
-        });
-    })
-    .catch(dispError);
+        addresses.forEach(getSmartLeaseData('#tenant-table tbody'));
+    });
 }
+
+function updateLandordTable() {
+    $('#landlord-table tbody').empty();
+    Factory.getPastEvents('NewLease', {filter: {landlord: userAccount}, fromBlock: 0, toBlock: 'latest'})
+    .then((logs) => {
+        if (logs.length === 0) {
+            $('#not-landlord-alert').show();
+            return Promise.reject();
+        }
+        $('#not-landlord-alert').hide();
+        return logs.map((log) => log.returnValues.contract_address);
+    })
+    .then((addresses) => {
+        addresses.forEach(getSmartLeaseData('#landlord-table tbody'));
+    });
+}   
 
 function dispError(error) {
     console.log(error);
+}
+
+function getSmartLeaseData(table_id_name) {
+    return function(address) {
+        let smartlease = SmartLease.clone();
+        smartlease.options.address = address;
+        methods = [
+            'landlord',
+            'numTenants',
+            'maxTenants',
+            'startDate',
+            'endDate',
+            'securityDeposit',
+            'googlePropertyId',
+            // 'isValid',
+            // 'isSigned'
+        ];
+        let tr = $(document.createElement('tr'));
+        Promise.all(methods.map((method) => {
+            return smartlease.methods[method + '()']().call();
+        }))
+        .then((results) => {
+            results.forEach(text => tr.append($(`<td>${text}</td>`)));
+        })
+        .then(() => {
+            tr.appendTo($(table_id_name));                
+        })
+        .catch(dispError);
+    }
 }
