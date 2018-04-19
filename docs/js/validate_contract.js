@@ -4,8 +4,8 @@ function validate() {
 	var first_name = $("#first_name").val();
 	var last_name = $("#last_name").val();
 	var place_id = $("#place_id").val();
-	var max_tenant = $("#max_tenant").val();
-	var start_date = $("#start_date").val();
+	var max_tenant = moment($("#max_tenant").val(), "YYYY-MM-DD").unix();
+	var start_date = moment($("#start_date").val(), "YYYY-MM-DD").unix();
 	var end_date = $("#end_date").val();
 	var email = $("#email").val();
 	var deposit = $("#deposit").val();
@@ -54,13 +54,11 @@ function validate() {
 
 function add_tenant_input() {
 
-	if ($('div .for_tenant_address').length >= $("#max_tenant").val()) {
-		return;
-	}
-	
-	$("#contact_form");.append(`<div class="modal-body for_tenant_address"> \
+	if ($('div .for_tenant_address').length < $("#max_tenant").val()) {
+		$("#contact_form").append(`<div class="modal-body for_tenant_address"> \
 		<label for="tenant_address">Tenant Ethereum Address:</label><input \
 		type="text" class="form-control tenant_address" id="tenant_address" \
 		placeholder="Enter Tenant's Ethereum Address" name="tenant_address"></div>`);
-
+	}
+	
 }
