@@ -1,9 +1,4 @@
 
-$('#close-button').click(function() {
-	$("#failed-contract-alert").hide();
-	$("#failed-contract-alert").hide();
-})
-
 function validate() {
 	
 	var first_name = $("#first_name").val();
@@ -54,5 +49,18 @@ function validate() {
 			getSmartLeaseDataForLandlord(contract_address);
 		});
 	}
+
+}
+
+function add_tenant_input() {
+
+	if ($('div .for_tenant_address').length >= $("#max_tenant").val()) {
+		return;
+	}
+	
+	$("#contact_form");.append(`<div class="modal-body for_tenant_address"> \
+		<label for="tenant_address">Tenant Ethereum Address:</label><input \
+		type="text" class="form-control tenant_address" id="tenant_address" \
+		placeholder="Enter Tenant's Ethereum Address" name="tenant_address"></div>`);
 
 }
