@@ -19,55 +19,24 @@ function validate() {
 
 	if (userAccount && Factory)
 	{
-		Factory.methods.createContract(first_name, last_name)
+		Factory.methods.createContract(
+			first_name,
+			last_name,
+			place_id,
+			max_tenant,
+			start_date,
+			end_date,
+			deposit,
+			rent
+			)
 		.send({from: userAccount})
 		.on('error', function(error) {
 			$("#failed-contract-alert").show();
 		})
 		.on('receipt', function(receipt) {
 			contract_address = receipt.events.NewLease.returnValues.contract_address
-			let smartlease = SmartLease.clone();
-			smartlease.options.address = contract_address;
-			console.log(receipt)
-			debugger
-			if (place_id) {
-				smartlease.methods.setGooglePlaceId(place_id)
-				.send({from: userAccount})
-				.on('error', function(error) {
-					console.log(error);
-				})
-				.on('receipt', function(receipt) {
-					console.log(receipt);
-				});
-			}
-			if (max_tenant) {
-				smartlease.methods.setMaxTenants(max_tenant)
-				.send({from: userAccount})
-				.then(() => {
-					console.log("max_tenant set to " + max_tenant);
-				});
-			}
-			if (start_date) {
-				smartlease.methods.setStartDate(start_date)
-				.send({from: userAccount})
-				.on('error', function(error) {
-					console.log(error);
-				})
-				.on('receipt', function(receipt) {
-					console.log(receipt);
-				});
-			}
-			if (end_date) {
-				smartlease.methods.setEndDate(end_date)
-				.send({from:userAccount})
-			}
-			if (deposit) {
-				smartlease.methods.setSecurityDeposit(deposit);
-			}
-			if (rent) {
-				smartlease.methods.setRent(rent);
-			}
 			getSmartLeaseDataForLandlord(contract_address);
+			$('not-landlord-alert').hide();
 			$('#close-button').click();
 		});
 	}
