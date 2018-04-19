@@ -58,9 +58,8 @@ function add_tenant_input() {
 		return;
 	}
 	
-	$("#contact_form");.append(`<div class="modal-body for_tenant_address"> \
+	$("#contact_form").append(`<div class="modal-body for_tenant_address"> \
 		<label for="tenant_address">Tenant Ethereum Address:</label><input \
 		type="text" class="form-control tenant_address" id="tenant_address" \
 		placeholder="Enter Tenant's Ethereum Address" name="tenant_address"></div>`);
-
 }

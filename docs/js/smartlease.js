@@ -84,14 +84,15 @@ function updateTenantsTable() {
     .then((logs) => {
         if (logs.length === 0) {
             $('#not-tenant-alert').show();
-            return Promise.reject();
+            return Promise.reject('no contracts');
         }
         $('#not-tenant-alert').hide();
         return logs.map((log) => log.returnValues.contract_address);
     })
     .then((addresses) => {
         addresses.forEach(getSmartLeaseDataForTenant);
-    });
+    })
+    .catch(dispError);
 }
 
 function updateLandordTable() {
@@ -140,7 +141,7 @@ function getSmartLeaseData(table_id_name) {
         .then((results) => {
             let isSigned = false;
             let isActive = false;
-            tr.append($(`<td>${address}</td>`));
+            tr.append($(`<td style="font-family:Monospace;">${address.toLowerCase()}</td>`));
             results.forEach((text, idx) => {
                 switch (idx) {
                     case 0: // Landlord name (first, last)
