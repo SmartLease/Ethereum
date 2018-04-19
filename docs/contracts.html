@@ -74,38 +74,46 @@
           <div class="modal-body">
             <form id="contact_form" action="/contract_form.php" method="POST">
 	            <div class="modal-body">  
-                <label for="first name">First Name:</label>
+                <label for="first_name">First Name:</label>
                 <input type="name" class="form-control" id="first_name" placeholder="Enter First Name" name="first name" required>
 	            </div>
               <div class="modal-body">
-                <label for="last name">Last Name:</label>
-                <input type="last name" class="form-control" id="last_name" placeholder="Enter Last Name" name="last name" required>
+                <label for="last_name">Last Name:</label>
+                <input type="name" class="form-control" id="last_name" placeholder="Enter Last Name" name="last name" required>
               </div>
               <div class="modal-body">
                 <label for="address">Address:</label>
                 <input type="text" class="form-control" onFocus="geolocate()" id="autocomplete" placeholder="Enter Address" name="address">
               </div>
               <div class="modal-body">
-                <label for="address">Place ID:</label>
+                <label for="place_id">Place ID:</label>
                 <input type="text" class="form-control" id="place_id" placeholder="Address's Place ID" name="place_id" disabled="True" required>
               </div>
               <div class="modal-body">
-                <label for="FmaxTenant">Max Number of Tenants:</label>
+                <label for="max_tenant">Max Number of Tenants:</label>
                 <input type="number" class="form-control" id="max_tenant" placeholder="Enter Maximum Number of Tenants" name="quantity" min="1" max="10" required>
               </div>
               <div class="modal-body">
-                <label for="FstartDate">Start Date:</label>
-                <input type="date" class="form-control" id="start_date" placeholder="Enter Start Date" name="start" required>
+                <label for="start_date">Start Date:</label>
+                <input type="date" class="form-control" id="start_date" placeholder="Enter Start Date" name="start">
               </div>
               <div class="modal-body">
-                <label for="FendDate">End Date:</label>
-                <input type="date" class="form-control" id="end_date" placeholder="Enter End Date" name="end" required>
+                <label for="end_date">End Date:</label>
+                <input type="date" class="form-control" id="end_date" placeholder="Enter End Date" name="end">
               </div>
               <div class="modal-body">
-                <label for="Femail">Email:</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter Email address" name="email" required>
-              </div>        
-            </form> 
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter Email address" name="email">
+              </div>
+              <div class="modal-body">
+                <label for="">Security Deposit:</label>
+                <input type="text" class="form-control" id="deposit" placeholder="Enter Deposit Amount" name="deposit">
+              </div>
+              <div class="modal-body">
+                <label for="rent">Email:</label>
+                <input type="email" class="form-control" id="rent" placeholder="Enter Rent Amount" name="rent">
+              </div>
+            </form>
           </div>
              
           <div class="col-m-12">
@@ -114,6 +122,15 @@
 	      &nbsp;&nbsp;&nbsp;&nbsp;
               <button type="button" class="btn btn-primary" onclick="validate()">Submit<i class="fa fa-paper-plane-o ml-1"></i></button>
 	            <br><br>
+
+              <!-- Contract Alerts -->
+              <div id="incomplete-contract-alert" class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
+                <h5 class="alert-heading">A first name, last name, and place ID are required to make a new contract.
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </h5>
+              </div>
               <div id="failed-contract-alert" class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
                 <h5 class="alert-heading">There was an error creating the contract
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -121,6 +138,7 @@
                 </button>
                 </h5>
               </div>
+
             </div>
 	        </div>
         </div>

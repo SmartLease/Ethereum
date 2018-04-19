@@ -104,8 +104,12 @@ contract SmartLease is Ownable {
     function setSecurityDeposit(uint _securityDepositAmount) public onlyOwner beforeSigning {
         securityDeposit = _securityDepositAmount;
     }
+    
+    function setRent(uint _rentAmount) public onlyOwner beforeSigning {
+        rent = _rentAmount;
+    }
 
-    function setGooglePropertyId(string _googlePropertyId) public onlyOwner beforeSigning {
-        googlePropertyId = _googlePropertyId;
+    function setGooglePlaceId(string _googlePlaceId) public onlyOwner beforeSigning {
+        googlePlaceId = _googlePlaceId;
     }
 }
