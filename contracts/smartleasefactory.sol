@@ -10,9 +10,30 @@ contract SmartLeaseFactory is Ownable {
 
     string public test = "Connected";
 
-    function createContract(string _first, string _last) external returns (SmartLease leaseAddress) {
-        SmartLease newContract = new SmartLease(_first, _last);
-        newContract.transferOwnership(tx.origin);
+    // function createContract(string _first, string _last) external returns (SmartLease leaseAddress) {
+    //     SmartLease newContract = new SmartLease(_first, _last);
+    //     newContract.transferOwnership(tx.origin);
+    //     emit NewLease(newContract, tx.origin);
+    //     return newContract;
+    // }
+
+	function createContract(
+		string _landlordFirst, 
+		string _landlordLast,
+		string _googlePlaceId,
+		uint _maxTenants,
+		uint _startDate, 
+		uint _endDate,
+		uint _securityDeposit, 
+		uint _rent
+		) external returns (SmartLease leaseAddress)
+	{
+		SmartLease newContract = new SmartLease(_landlordFirst, _landlordLast,
+												_googlePlaceId,
+												_maxTenants,
+												_startDate, _endDate,
+												_securityDeposit, _rent);
+		newContract.transferOwnership(tx.origin);
         emit NewLease(newContract, tx.origin);
         return newContract;
     }

@@ -1,6 +1,6 @@
 pragma solidity ^0.4.21;
 
-import "zeppelin-solidity/contracts/ownership/Ownable.sol";
+import "zeppelin-solidity/contracts/lifecycle/Destructible.sol";
 import "zeppelin-solidity/contracts/ECRecovery.sol";
 
 
@@ -11,7 +11,7 @@ contract FactoryAPI {
     function emitNewTenant(address _contract_address, address _tenant) public;
 }
 
-contract SmartLease is Ownable {
+contract SmartLease is Destructible {
 
     event NewSmartLease(address indexed landlord);
     event ApproveSmartLease(address indexed tenant);
@@ -53,9 +53,35 @@ contract SmartLease is Ownable {
         isSigned = true;
     }
 
-    function SmartLease(string _firstName, string _lastName) public {
-        landlord.firstName = _firstName;
-        landlord.lastName = _lastName;
+    // function SmartLease(string _firstName, string _lastName) public {
+    //     landlord.firstName = _firstName;
+    //     landlord.lastName = _lastName;
+    //     factoryAddr = msg.sender;
+    // }
+
+    function SmartLease(
+        string _landlordFirst,
+        string _landlordLast,
+        string _googlePlaceId,
+        uint _maxTenants,
+        uint _startDate,
+        uint _endDate,
+        uint _securityDeposit,
+        uint _rent
+        ) public
+    {
+        require(_maxTenants > 0);
+        require(_endDate > _startDate);
+
+        landlord.firstName = _landlordFirst;
+        landlord.lastName = _landlordLast;
+        googlePlaceId = _googlePlaceId;
+        maxTenants = _maxTenants;
+        startDate = _startDate;
+        endDate = _endDate;
+        securityDeposit = _securityDeposit;
+        monthlyRent = _rent;
+
         factoryAddr = msg.sender;
     }
 
