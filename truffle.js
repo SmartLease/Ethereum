@@ -1,7 +1,6 @@
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
   // to customize your Truffle configuration!
-  contracts_build_directory: "./docs/build/contracts",
   networks: {
     development: {
       host: "127.0.0.1",
