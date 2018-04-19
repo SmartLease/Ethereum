@@ -141,46 +141,46 @@ function getSmartLeaseData(table_id_name) {
             let isSigned = false;
             let isActive = false;
             tr.append($(`<td>${address}</td>`));
-            // results.forEach((text, idx) => {
-            //     switch (idx) {
-            //         case 0: // Landlord name (first, last)
-            //             tr.append($(`<td>${text[0]} ${text[1]}</td>`));
-            //             break;
-            //         case 3: // start date
-            //         case 4: // end date
-            //             let dateString = moment().unix(text).format("MMM Do YY");
-            //             tr.append($(`<td>${dateString} (GMT)</td>`));
-            //             break;
-            //         case 7: // google prop id + link
-            //             tr.append($(`<td><a href="#">${text}</a></td>`));
-            //             break;
-            //         case 8: // is active (past start date)
-            //             if (text === 0) {
-            //                 tr.append($(`<td><span class="label label-warning">Not Active</span></td>`));
-            //             } else {
-            //                 isActive = true;
-            //                 tr.append($(`<td><span class="label label-info">Active</span></td>`));
-            //             }
-            //             break;
-            //         case 9: // is signed (by at least one tenant)
-            //             if (text === 0) {
-            //                 tr.append($(`<td><span class="label label-warning">Not Signed</span></td>`));
-            //             } else {
-            //                 isSigned = true;
-            //                 tr.append($(`<td><span class="label label-info">Signed</span></td>`));
-            //             }
-            //             break;
-            //         default:
-            //             tr.append($(`<td>${text}</td>`));
-            //     }
-            // });
-            // let editBtn = $(`<td><button class="btn btn-light" data-toggle="modal" data-target="#contact_dialog">Edit</button></td>`);
-            // if (isSigned || isActive) editBtn.prop("disabled", true);
-            // tr.append(editBtn);
+            results.forEach((text, idx) => {
+                switch (idx) {
+                    case 0: // Landlord name (first, last)
+                        tr.append($(`<td>${text[0]} ${text[1]}</td>`));
+                        break;
+                    case 3: // start date
+                    case 4: // end date
+                        let dateString = moment.unix(text).format("MMM Do YY");
+                        tr.append($(`<td>${dateString} (GMT)</td>`));
+                        break;
+                    case 7: // google prop id + link
+                        tr.append($(`<td><a href="#">${text}</a></td>`));
+                        break;
+                    case 8: // is active (past start date)
+                        if (text === 0) {
+                            tr.append($(`<td><span class="label label-warning">Not Active</span></td>`));
+                        } else {
+                            isActive = true;
+                            tr.append($(`<td><span class="label label-info">Active</span></td>`));
+                        }
+                        break;
+                    case 9: // is signed (by at least one tenant)
+                        if (text === 0) {
+                            tr.append($(`<td><span class="label label-warning">Not Signed</span></td>`));
+                        } else {
+                            isSigned = true;
+                            tr.append($(`<td><span class="label label-info">Signed</span></td>`));
+                        }
+                        break;
+                    default:
+                        tr.append($(`<td>${text}</td>`));
+                }
+            });
+            let editBtn = $(`<td><button class="btn btn-light" data-toggle="modal" data-target="#contact_dialog">Edit</button></td>`);
+            if (isSigned || isActive) editBtn.prop("disabled", true);
+            tr.append(editBtn);
 
-            // let deleteBtn = $(`<td><button class="btn btn-danger" data-toggle="modal" data-target="#delete_dialog">Delete</button></td>`);
-            // if (isActive) deleteBtn.prop("disabled", true);
-            // tr.append(deleteBtn);
+            let deleteBtn = $(`<td><button class="btn btn-danger" data-toggle="modal" data-target="#delete_dialog">Delete</button></td>`);
+            if (isActive) deleteBtn.prop("disabled", true);
+            tr.append(deleteBtn);
         })
         .then(() => {
             tr.appendTo($(table_id_name));                
