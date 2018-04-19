@@ -54,7 +54,7 @@ contract SmartLease is Ownable {
     uint public endDate = 0;
     uint public securityDeposit = 0;
     uint public monthlyRent = 0;
-    string public googlePropertyId = "";
+    string public googlePlaceId = "";
     bool public isActive;
     bool public isSigned;
 
@@ -106,7 +106,7 @@ contract SmartLease is Ownable {
     }
     
     function setRent(uint _rentAmount) public onlyOwner beforeSigning {
-        rent = _rentAmount;
+        monthlyRent = _rentAmount;
     }
 
     function setGooglePlaceId(string _googlePlaceId) public onlyOwner beforeSigning {

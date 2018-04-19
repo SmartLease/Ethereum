@@ -129,7 +129,7 @@ function getSmartLeaseData(table_id_name) {
             'endDate',
             'securityDeposit',
             'monthlyRent',
-            'googlePropertyId',
+            'googlePlaceId',
             'isActive',
             'isSigned'
         ];
