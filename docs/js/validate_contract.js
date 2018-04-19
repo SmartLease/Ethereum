@@ -54,12 +54,11 @@ function validate() {
 
 function add_tenant_input() {
 
-	if ($('div .for_tenant_address').length >= $("#max_tenant").val()) {
-		return;
-	}
-	
-	$("#contact_form").append(`<div class="modal-body for_tenant_address"> \
+	if ($('div .for_tenant_address').length < $("#max_tenant").val()) {
+		$("#contact_form").append(`<div class="modal-body for_tenant_address"> \
 		<label for="tenant_address">Tenant Ethereum Address:</label><input \
 		type="text" class="form-control tenant_address" id="tenant_address" \
 		placeholder="Enter Tenant's Ethereum Address" name="tenant_address"></div>`);
+	}
+	
 }
