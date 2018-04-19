@@ -108,7 +108,8 @@ function updateLandordTable() {
     })
     .then((addresses) => {
         addresses.forEach(getSmartLeaseDataForLandlord);
-    });
+    })
+    .catch(dispError);
 }   
 
 function dispError(error) {
