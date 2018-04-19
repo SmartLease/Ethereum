@@ -17,8 +17,8 @@ function validate() {
 	var rent = $("#rent").val();
 	var contract_box = $("#contact_dialog");
 
-	if (last_name == "" || first_name == "" || place_id == "") {
-		$("#failed-contract-alert").show();
+	if (!last_name || !first_name || !place_id) {
+		$("#incomplete-contract-alert").show();
 		return;
 	}
 
@@ -33,22 +33,22 @@ function validate() {
 			$('#close-button').click();
 			contract_address = receipt.events.NewLease.returnValues.contract_address
 			SmartLease.options.address = contract_address;
-			if (place_id != "") {
+			if (place_id) {
 				SmartLease.methods.SetPlaceId(place_id);
 			}
-			if (max_tenant != "") {
+			if (max_tenant) {
 				SmartLease.methods.SetMaxTenants(max_tenant);
 			}
-			if (start_date != "") {
+			if (start_date) {
 				SmartLease.methods.SetStartDate(start_date);
 			}
-			if (end_date != "") {
+			if (end_date) {
 				SmartLease.methods.SetEndDate(end_date)
 			}
-			if (deposit != "") {
+			if (deposit) {
 				SmartLease.methods.SetSecurityDeposit(deposit);
 			}
-			if (rent != "") {
+			if (rent) {
 				SmartLease.methods.SetRent(rent);
 			}
 			getSmartLeaseDataForLandlord(contract_address);
