@@ -2,20 +2,19 @@
 
 function validate() {
 	
-	var first_name = $("#first_name").value;
-	var last_name = $("#last_name").value;
-	var place_id = $("#place_id").value;
-	var max_tenant = $("#max_tenant").value;
-	var start_date = $("#start_date").value;
-	var end_date = $("#end_date").value;
-	var email = $("#email").value;
-	var deposit = $("#deposit").value;
-	var rent = $("#rent").value;
+	var first_name = $("#first_name").val();
+	var last_name = $("#last_name").val();
+	var place_id = $("#place_id").val();
+	var max_tenant = $("#max_tenant").val();
+	var start_date = $("#start_date").val();
+	var end_date = $("#end_date").val();
+	var email = $("#email").val();
+	var deposit = $("#deposit").val();
+	var rent = $("#rent").val();
 	var contract_box = $("#contact_dialog");
 
 	if (last_name == "" || first_name == "" || place_id == "") {
 		$("#failed-contract-alert").show();
-		setTimeout(function() {$("#incomplete-contract-alert").hide();}, 10000);
 	}
 
 	if (userAccount && Factory)
@@ -24,7 +23,6 @@ function validate() {
 		.send({from: userAccount})
 		.on('error', function(error) {
 			$("#failed-contract-alert").show();
-			setTimeout(function() {$("#failed-contract-alert").hide();}, 10000);
 		})
 		.on('receipt', function(receipt) {
 			$('#close-button').click();
