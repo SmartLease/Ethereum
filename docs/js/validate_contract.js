@@ -1,4 +1,8 @@
 
+$('#close-button').click(function() {
+	$("#failed-contract-alert").hide();
+	$("#failed-contract-alert").hide();
+})
 
 function validate() {
 	
@@ -15,6 +19,7 @@ function validate() {
 
 	if (last_name == "" || first_name == "" || place_id == "") {
 		$("#failed-contract-alert").show();
+		return;
 	}
 
 	if (userAccount && Factory)
