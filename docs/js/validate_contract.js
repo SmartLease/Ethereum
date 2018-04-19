@@ -1,6 +1,7 @@
 
 
 function validate() {
+	
 	var first_name = document.getElementById("first_name").value;
 	var last_name = document.getElementById("last_name").value;
 	var place_id = document.getElementById("place_id").value;
@@ -14,13 +15,14 @@ function validate() {
 	{
 		Factory.methods.createContract(first_name, last_name)
 		.send({from: userAccount})
-		.then(function(receipt) {
-			getSmartLeaseDataForLandlord();
-			contract_box.css('display', 'none');
-			contract_box.prop('aria-hidden', 'true');
-			$('.modal-backdrop').remove();
-			$('body').removeClass('modal-open');
-			console.log(receipt);
+		.on('error', function(error) {
+			$("#failed-contract-alert").show();
+			setTimeout(function() {$("#failed-contract-alert").hide();}, 5000);
+		})
+		.on('receipt', function(receipt) {
+			$('#close-button').click();
+			console.log(receipt.events.NewLease.returnValues.contract_address);
+			getSmartLeaseDataForLandlord(receipt.events.NewLease.returnValues.contract_address);
 		});
 	}
 
