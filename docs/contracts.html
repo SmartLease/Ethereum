@@ -72,7 +72,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form id="contact_form" action="/contract_form.php" method="POST">
+            <form id="contact_form" action="#" method="POST">
 	            <div class="modal-body">  
                 <label for="first_name">First Name:</label>
                 <input type="name" class="form-control" id="first_name" placeholder="Enter First Name" name="first name" required>
@@ -88,10 +88,6 @@
               <div class="modal-body">
                 <label for="place_id">Place ID:</label>
                 <input type="text" class="form-control" id="place_id" placeholder="Address's Place ID" name="place_id" disabled="True" required>
-              </div>
-              <div class="modal-body">
-                <label for="max_tenant">Max Number of Tenants:</label>
-                <input type="number" class="form-control" id="max_tenant" placeholder="Enter Maximum Number of Tenants" name="quantity" min="1" max="10" required>
               </div>
               <div class="modal-body">
                 <label for="start_date">Start Date:</label>
@@ -112,6 +108,21 @@
               <div class="modal-body">
                 <label for="rent">Monthly Rent:</label>
                 <input type="number" class="form-control" id="rent" placeholder="Enter Rent Amount" name="rent">
+              </div>
+              <div class="modal-body">
+                <label for="max_tenant">Max Number of Tenants:</label>
+                <input type="number" class="form-control" id="max_tenant" placeholder="Enter Maximum Number of Tenants" name="quantity" min="1" max="10">
+              </div>
+              <div class="modal-body for_tenant_address">
+                <label for="tenant_address">Tenant Ethereum Address:</label>
+                <div class="row">
+                  <div class="col-lg-8">
+                    <input type="text" class="form-control tenant_address" id="tenant_address" placeholder="Enter Tenant's Ethereum Address" name="tenant_address">
+                  </div>
+                  <div class="col-lg-4">
+                    <button type="button" class="btn btn-primary" onclick="add_tenant_input()">Add Another Tenant</button>
+                  </div>
+                </div>
               </div>
             </form>
           </div>
