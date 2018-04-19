@@ -5,8 +5,8 @@ function validate() {
 	var last_name = $("#last_name").val();
 	var place_id = $("#place_id").val();
 	var max_tenant = $("#max_tenant").val();
-	var start_date = $("#start_date").val();
-	var end_date = $("#end_date").val();
+	var start_date = moment($("#start_date").val(), "YYYY-MM-DD").unix();
+	var end_date = moment($("#end_date").val(), "YYYY-MM-DD").unix();
 	var email = $("#email").val();
 	var deposit = $("#deposit").val();
 	var rent = $("#rent").val();
@@ -25,28 +25,50 @@ function validate() {
 			$("#failed-contract-alert").show();
 		})
 		.on('receipt', function(receipt) {
-			$('#close-button').click();
 			contract_address = receipt.events.NewLease.returnValues.contract_address
-			SmartLease.options.address = contract_address;
+			let smartlease = SmartLease.clone();
+			smartlease.options.address = contract_address;
+			console.log(receipt)
+			debugger
 			if (place_id) {
-				SmartLease.methods.SetPlaceId(place_id);
+				smartlease.methods.setGooglePlaceId(place_id)
+				.send({from: userAccount})
+				.on('error', function(error) {
+					console.log(error);
+				})
+				.on('receipt', function(receipt) {
+					console.log(receipt);
+				});
 			}
 			if (max_tenant) {
-				SmartLease.methods.SetMaxTenants(max_tenant);
+				smartlease.methods.setMaxTenants(max_tenant)
+				.send({from: userAccount})
+				.then(() => {
+					console.log("max_tenant set to " + max_tenant);
+				});
 			}
 			if (start_date) {
-				SmartLease.methods.SetStartDate(start_date);
+				smartlease.methods.setStartDate(start_date)
+				.send({from: userAccount})
+				.on('error', function(error) {
+					console.log(error);
+				})
+				.on('receipt', function(receipt) {
+					console.log(receipt);
+				});
 			}
 			if (end_date) {
-				SmartLease.methods.SetEndDate(end_date)
+				smartlease.methods.setEndDate(end_date)
+				.send({from:userAccount})
 			}
 			if (deposit) {
-				SmartLease.methods.SetSecurityDeposit(deposit);
+				smartlease.methods.setSecurityDeposit(deposit);
 			}
 			if (rent) {
-				SmartLease.methods.SetRent(rent);
+				smartlease.methods.setRent(rent);
 			}
 			getSmartLeaseDataForLandlord(contract_address);
+			$('#close-button').click();
 		});
 	}
 
