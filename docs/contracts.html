@@ -135,8 +135,8 @@
               <table id="landlord-table" class="table table-striped table-hover" margin="0px auto">     
                 <thead>
                   <tr>
-                    <th id="item" scope="col">#</th>
-                    <th id="isValid" scope="col">Valid</th>
+                    <th id="address" scope="col">Address</th>
+                    <th id="isActive" scope="col">Valid</th>
                     <th id="isSigned" scope="col">Signed</th>
                     <th id="landlord" scope="col">Landlord</th>
                     <th id="tenants" scope="col"># Tenants</th>
@@ -163,8 +163,8 @@
               <table id="tenant-table" class="table table-striped table-hover" margin="0px auto">     
                 <thead>
                   <tr>
-                    <th id="item" scope="col">#</th>
-                    <th id="isValid" scope="col">Valid</th>
+                    <th id="address" scope="col">#</th>
+                    <th id="isActive" scope="col">Valid</th>
                     <th id="isSigned" scope="col">Signed</th>
                     <th id="landlord" scope="col">Landlord</th>
                     <th id="tenants" scope="col"># Tenants</th>
@@ -223,6 +223,9 @@
   <script src="lib/superfish/hoverIntent.js"></script>
   <script src="lib/superfish/superfish.min.js"></script>
   
+  <!-- Moment.js for time handling -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+
   <!-- Web3 1.0.0-beta.34 bundle created with Browserify -->
   <script src="lib/web3/web3js.browserify.js"></script>
 
