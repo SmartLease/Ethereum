@@ -155,32 +155,32 @@ function getSmartLeaseData(table_id_name) {
                         tr.append($(`<td><a href="#">${text}</a></td>`));
                         break;
                     case 8: // is active (past start date)
-                        if (text === 0) {
-                            tr.append($(`<td><span class="label label-warning">Not Active</span></td>`));
+                        isActive = text;
+                        if (text === false) {
+                            tr.append($(`<td><span class="badge badge-warning">Not Active</span></td>`));
                         } else {
-                            isActive = true;
-                            tr.append($(`<td><span class="label label-info">Active</span></td>`));
+                            tr.append($(`<td><span class="badge badge-success">Active</span></td>`));
                         }
                         break;
                     case 9: // is signed (by at least one tenant)
-                        if (text === 0) {
-                            tr.append($(`<td><span class="label label-warning">Not Signed</span></td>`));
+                        isSigned = text;
+                        if (text === false) {
+                            tr.append($(`<td><span class="badge badge-warning">Not Signed</span></td>`));
                         } else {
-                            isSigned = true;
-                            tr.append($(`<td><span class="label label-info">Signed</span></td>`));
+                            tr.append($(`<td><span class="badge badge-info">Signed</span></td>`));
                         }
                         break;
                     default:
                         tr.append($(`<td>${text}</td>`));
                 }
             });
-            let editBtn = $(`<td><button class="btn btn-light" data-toggle="modal" data-target="#contact_dialog">Edit</button></td>`);
+            let editBtn = $(`<td><button class="btn btn-info" data-toggle="modal" data-target="#contact_dialog">Edit</button></td>`);
             if (isSigned || isActive) editBtn.prop("disabled", true);
-            tr.append(editBtn);
+            tr.prepend(editBtn);
 
-            let deleteBtn = $(`<td><button class="btn btn-danger" data-toggle="modal" data-target="#delete_dialog">Delete</button></td>`);
+            let deleteBtn = $(`<td><button class="btn btn-danger" data-toggle="modal" data-target="#delete-dialog">Delete</button></td>`);
             if (isActive) deleteBtn.prop("disabled", true);
-            tr.append(deleteBtn);
+            tr.prepend(deleteBtn);
         })
         .then(() => {
             tr.appendTo($(table_id_name));                
