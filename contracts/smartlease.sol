@@ -53,8 +53,9 @@ contract SmartLease is Ownable {
     uint public startDate = 0;
     uint public endDate = 0;
     uint public securityDeposit = 0;
+    uint public monthlyRent = 0;
     string public googlePropertyId = "";
-    bool public isValid;
+    bool public isActive;
     bool public isSigned;
 
     modifier beforeSigning() {
