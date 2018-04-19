@@ -3,24 +3,6 @@ pragma solidity ^0.4.21;
 import "zeppelin-solidity/contracts/ownership/Ownable.sol";
 import "zeppelin-solidity/contracts/ECRecovery.sol";
 
-contract DateTimeAPI {
-    /*
-     *  Abstract contract for interfacing with the DateTime contract.
-     *  See: https://github.com/pipermerriam/ethereum-datetime/blob/master/contracts/DateTime.sol
-     */
-    function isLeapYear(uint16 year) public pure returns (bool);
-    function getYear(uint timestamp) public pure returns (uint16);
-    function getMonth(uint timestamp) public pure returns (uint8);
-    function getDay(uint timestamp) public pure returns (uint8);
-    function getHour(uint timestamp) public pure returns (uint8);
-    function getMinute(uint timestamp) public pure returns (uint8);
-    function getSecond(uint timestamp) public pure returns (uint8);
-    function getWeekday(uint timestamp) public pure returns (uint8);
-    function toTimestamp(uint16 year, uint8 month, uint8 day) public pure returns (uint timestamp);
-    function toTimestamp(uint16 year, uint8 month, uint8 day, uint8 hour) public pure returns (uint timestamp);
-    function toTimestamp(uint16 year, uint8 month, uint8 day, uint8 hour, uint8 minute) public pure returns (uint timestamp);
-    function toTimestamp(uint16 year, uint8 month, uint8 day, uint8 hour, uint8 minute, uint8 second) public pure returns (uint timestamp);
-}
 
 contract FactoryAPI {
     /*
@@ -38,9 +20,6 @@ contract SmartLease is Ownable {
         string firstName;
         string lastName;
     }
-
-    address dateTimeAddr = 0; // main chain address: 0x1a6184CD4C5Bea62B0116de7962EE7315B7bcBce;
-    DateTimeAPI DateTime = DateTimeAPI(dateTimeAddr);
 
     address public factoryAddr;
 
@@ -93,12 +72,12 @@ contract SmartLease is Ownable {
         factory.emitNewTenant(this, _tenantAddr);
     }
 
-    function setStartDate(uint16 _year, uint8 _month, uint8 _day) public onlyOwner beforeSigning dateTimeAddressValid(dateTimeAddr) {
-        startDate = DateTime.toTimestamp(_year, _month, _day);
+    function setStartDate(uint _seconds) public onlyOwner beforeSigning {
+        startDate = _seconds;
     }
 
-    function setEndDate(uint16 _year, uint8 _month, uint8 _day) public onlyOwner beforeSigning dateTimeAddressValid(dateTimeAddr) {
-        endDate = DateTime.toTimestamp(_year, _month, _day);
+    function setEndDate(uint _seconds) public onlyOwner beforeSigning {
+        endDate = _seconds;
     }
 
     function setSecurityDeposit(uint _securityDepositAmount) public onlyOwner beforeSigning {
