@@ -7,16 +7,9 @@ contract SmartLeaseFactory is Ownable {
 
     event NewLease(address contract_address, address indexed landlord);
     event NewTenant(address contract_address, address indexed tenant);
-	event DestroyLease(address indexed contract_address);
+	event DestroyLease(address indexed contract_address, address _recipient);
 
     string public test = "Connected";
-
-    // function createContract(string _first, string _last) external returns (SmartLease leaseAddress) {
-    //     SmartLease newContract = new SmartLease(_first, _last);
-    //     newContract.transferOwnership(tx.origin);
-    //     emit NewLease(newContract, tx.origin);
-    //     return newContract;
-    // }
 
 	modifier landlordOnly() {
 		SmartLease existingLease = SmartLease(msg.sender);
@@ -54,7 +47,7 @@ contract SmartLeaseFactory is Ownable {
 		emit NewTenant(_lease_address, _tenant_address);
 	}
 
-	function emitDestroyLease(address _lease_address) public smartleaseOnly(_lease_address) landlordOnly {
-		emit DestroyLease(_lease_address);
+	function emitDestroyLease(address _lease_address, address _recipient) public smartleaseOnly(_lease_address) landlordOnly {
+		emit DestroyLease(_lease_address, _recipient);
 	}
 }

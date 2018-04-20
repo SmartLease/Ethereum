@@ -1,4 +1,4 @@
-const FactoryAddress = '0x0e6beccee6ec40997416ae261cb557d748a194ad';
+const FactoryAddress = "0x990073D2a5f22dad55C90e6C850440d9d20600dc"; // ropsten address
 const FactoryURI = 'build/contracts/SmartLeaseFactory.json';
 const SmartLeaseURI = 'build/contracts/SmartLease.json';
 
@@ -27,18 +27,16 @@ $(function() {
 });
 
 
-function setUpHandlers() {
+function setDeleteHandler() {
     $('#delete-dialog').on('show.bs.modal', function(modal_event) {
-        console.log('here')
         let btn = $(modal_event.relatedTarget);
         let contract_address = btn.data('contract');
 
         let dialog = $(this);
         dialog.find("button:contains('Delete')").on('click', function(delete_event) {
+            delete_event.preventDefault();
             let smartlease = SmartLease.clone();
             smartlease.options.address = contract_address;
-            console.log(contract_address);
-            // smartlease.methods.test().call().then(console.log).catch(dispError).then(() => {debugger;});
             smartlease.methods.destroy().send({from: userAccount, gas: 10000000})
             .on('error', dispError)
             .on('receipt', function(receipt) {
@@ -49,6 +47,35 @@ function setUpHandlers() {
             .catch(dispError);
         });
     });
+}
+
+function setSignatureHandler() {
+    $('#signature-dialog').on('show.bs.modal', function(modal_event) {
+        let btn = $(modal_event.relatedTarget);
+        let contract_address = btn.data('contract');
+        let dialog = $(this);
+        dialog.find("button:contains('Sign')").on('click', function(sign_event) {
+            sign_event.preventDefault();
+            let msg = dialog.find("#msg").val();
+            console.log(msg);
+            let smartlease = SmartLease.clone();
+            smartlease.options.address = contract_address;
+            let msg_hash = web3js.utils.keccak256("\x19Ethereum Signed Message:\n" + msg.length + msg);
+            web3.eth.sign(userAccount, msg_hash, (error, signature) => { // only web3 working for signing??
+                smartlease.methods.signLease(msg_hash, signature).send({from: userAccount})
+                .on('error', console.log)
+                .then(receipt => {
+                    console.log(receipt);
+                })
+                .finally(() => dialog.modal('hide'));
+            });
+        });
+    });
+}
+
+function setUpHandlers() {
+    setDeleteHandler();
+    setSignatureHandler();
 }
 
 function checkForMetaMask() {
@@ -151,7 +178,8 @@ function getSmartLeaseData(table_id_name) {
         let isSigned = false;
         let isActive = false;
         Factory.getPastEvents('DestroyLease', {filter: {contract_address: address}, fromBlock: 0, toBlock: 'latest'})
-         .then((logs) => {
+        .then((logs) => {
+            // console.log(logs);
             if (logs.length !== 0) {
                 return Promise.reject();
             }
@@ -176,6 +204,7 @@ function getSmartLeaseData(table_id_name) {
                 return smartlease.methods[method + '()']().call()
             }))
             .then((results) => {
+                tr.append($(`<td style="font-family:Monospace;">${address.toLowerCase()}</td>`));
                 results.forEach((text, idx) => {
                     switch (idx) {
                         case 0: // Landlord name (first, last)
@@ -191,7 +220,7 @@ function getSmartLeaseData(table_id_name) {
                             break;
                         case 8: // is active (past start date)
                             isActive = text;
-                            if (text === false) {
+                            if (isActive === false) {
                                 tr.append($(`<td><span class="badge badge-warning">Not Active</span></td>`));
                             } else {
                                 tr.append($(`<td><span class="badge badge-success">Active</span></td>`));
@@ -199,7 +228,7 @@ function getSmartLeaseData(table_id_name) {
                             break;
                         case 9: // is signed (by at least one tenant)
                             isSigned = text;
-                            if (text === false) {
+                            if (isSigned === false) {
                                 tr.append($(`<td><span class="badge badge-warning">Not Signed</span></td>`));
                             } else {
                                 tr.append($(`<td><span class="badge badge-info">Signed</span></td>`));
@@ -212,21 +241,21 @@ function getSmartLeaseData(table_id_name) {
             })
             .then(() => {
                 if (table_id_name.includes('tenant')) {
-                    let signBtn = $(`<td><button class="btn btn-success" data-toggle="modal" data-target="#signature_dialog" data-contract="${address.toLowerCase()}">Sign</button></td>`);
+                    let signBtn = $(`<td><button class="btn btn-success" data-toggle="modal" data-target="#signature-dialog" data-contract="${address.toLowerCase()}">Sign</button></td>`);
                     smartlease.methods.tenantToSigned(userAccount).call()
                     .then(signStatus => {
-                            signBtn.prop('disabled', signStatus);
-                            tr.prepend(signBtn);
-                            tr.prepend($('<td></td>'));
+                        signBtn.find('button').prop("disabled", signStatus);
+                        tr.prepend(signBtn);
+                        tr.prepend($('<td></td>'));
                     })
                     .catch(dispError);
                 } else {
                     let editBtn = $(`<td><button class="btn btn-info" data-toggle="modal" data-target="#contact_dialog" data-contract="${address.toLowerCase()}">Edit</button></td>`);
-                    editBtn.prop("disabled", isSigned || isActive);
+                    editBtn.find('button').prop("disabled", isSigned || isActive);
                     tr.prepend(editBtn);
     
                     let deleteBtn = $(`<td><button class="btn btn-danger delete-btn" data-toggle="modal" data-target="#delete-dialog" data-contract="${address.toLowerCase()}">Delete</button></td>`);
-                    deleteBtn.prop("disabled", isActive);
+                    deleteBtn.find('button').prop("disabled", isActive);
                     tr.prepend(deleteBtn);
                 }
             })

@@ -1,6 +1,6 @@
 pragma solidity ^0.4.21;
 
-import "zeppelin-solidity/contracts/lifecycle/Destructible.sol";
+import "zeppelin-solidity/contracts/ownership/Ownable.sol";
 import "zeppelin-solidity/contracts/ECRecovery.sol";
 
 
@@ -9,12 +9,12 @@ contract FactoryAPI {
      *   Abstract contract to allow SmartLease to emit a NewTenant event in the factory.
      */
     function emitNewTenant(address _contract_address, address _tenant) public;
+    function emitDestroyLease(address _lease_address, address _recipient) public;
 }
 
-contract SmartLease is Destructible {
+contract SmartLease is Ownable {
 
-    event NewSmartLease(address indexed landlord);
-    event ApproveSmartLease(address indexed tenant);
+    event ApprovedSmartLease(address indexed tenant);
 
     string public test = "Connected";
 
@@ -44,22 +44,12 @@ contract SmartLease is Destructible {
         _;
     }
 
-    modifier dateTimeAddressValid(address _dtAddress) {
-        require(_dtAddress != 0);
-        _;
-    }
-
     function signLease(bytes32 _hash, bytes _sig) public {
         require(msg.sender == ECRecovery.recover(_hash, _sig) && _hash == keccak256("\x19Ethereum Signed Message:\n7I AGREE"));
         tenantToSigned[msg.sender] = true;
         isSigned = true;
+        emit ApprovedSmartLease(msg.sender);
     }
-
-    // function SmartLease(string _firstName, string _lastName) public {
-    //     landlord.firstName = _firstName;
-    //     landlord.lastName = _lastName;
-    //     factoryAddr = msg.sender;
-    // }
 
     function SmartLease(
         string _landlordFirst,
@@ -118,5 +108,19 @@ contract SmartLease is Destructible {
 
     function setGooglePlaceId(string _googlePlaceId) public onlyOwner beforeSigning {
         googlePlaceId = _googlePlaceId;
+    }
+
+    function paySecurityDeposit() public payable { }
+
+    function destroy() onlyOwner public {
+        FactoryAPI factory = FactoryAPI(factoryAddr);
+        factory.emitDestroyLease(this, owner);
+        selfdestruct(owner);
+    }
+
+    function destroyAndSend(address _recipient) onlyOwner public {
+        FactoryAPI factory = FactoryAPI(factoryAddr);
+        factory.emitDestroyLease(this, _recipient);
+        selfdestruct(_recipient);
     }
 }
