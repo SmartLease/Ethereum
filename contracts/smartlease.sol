@@ -16,6 +16,8 @@ contract SmartLease is Destructible {
     event NewSmartLease(address indexed landlord);
     event ApproveSmartLease(address indexed tenant);
 
+    string public test = "Connected";
+
     struct Person {
         string firstName;
         string lastName;

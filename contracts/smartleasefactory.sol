@@ -7,6 +7,7 @@ contract SmartLeaseFactory is Ownable {
 
     event NewLease(address contract_address, address indexed landlord);
     event NewTenant(address contract_address, address indexed tenant);
+	event DestroyLease(address indexed contract_address);
 
     string public test = "Connected";
 
@@ -16,6 +17,17 @@ contract SmartLeaseFactory is Ownable {
     //     emit NewLease(newContract, tx.origin);
     //     return newContract;
     // }
+
+	modifier landlordOnly() {
+		SmartLease existingLease = SmartLease(msg.sender);
+		require(tx.origin == existingLease.owner());
+		_;
+	}
+
+	modifier smartleaseOnly(address _lease_address) {
+		require(msg.sender == _lease_address);
+		_;
+	}
 
 	function createContract(
 		string _landlordFirst, 
@@ -38,7 +50,11 @@ contract SmartLeaseFactory is Ownable {
         return newContract;
     }
 
-	function emitNewTenant(address _contract_address, address _tenant) public {
-		emit NewTenant(_contract_address, _tenant);
+	function emitNewTenant(address _lease_address, address _tenant_address) public smartleaseOnly(_lease_address) landlordOnly {
+		emit NewTenant(_lease_address, _tenant_address);
+	}
+
+	function emitDestroyLease(address _lease_address) public smartleaseOnly(_lease_address) landlordOnly {
+		emit DestroyLease(_lease_address);
 	}
 }

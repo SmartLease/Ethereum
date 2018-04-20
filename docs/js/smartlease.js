@@ -1,4 +1,4 @@
-const FactoryAddress = '0x345ca3e014aaf5dca488057592ee47305d9b3e10';
+const FactoryAddress = '0x0e6beccee6ec40997416ae261cb557d748a194ad';
 const FactoryURI = 'build/contracts/SmartLeaseFactory.json';
 const SmartLeaseURI = 'build/contracts/SmartLease.json';
 
@@ -23,7 +23,7 @@ $(function() {
     checkForMetaMask()
     .then(loadContracts)
     .then(startUpdateLoop)
-    .catch(dispError)
+    .catch(dispError);
 });
 
 
@@ -38,12 +38,15 @@ function setUpHandlers() {
             let smartlease = SmartLease.clone();
             smartlease.options.address = contract_address;
             console.log(contract_address);
-            smartlease.methods.destroy().send({from: userAccount})
+            // smartlease.methods.test().call().then(console.log).catch(dispError).then(() => {debugger;});
+            smartlease.methods.destroy().send({from: userAccount, gas: 10000000})
             .on('error', dispError)
             .on('receipt', function(receipt) {
                 console.log(receipt);
                 dialog.modal('hide');
-            });
+            })
+            .then(console.log)
+            .catch(dispError);
         });
     });
 }
@@ -87,7 +90,7 @@ function loadContracts() { // Where user is "landlord"
 
 function startUpdateLoop() {
     checkUser();
-    setInterval(checkUser, 2000);
+    setInterval(checkUser, 1000);
 }
 
 function checkUser() {
@@ -124,14 +127,15 @@ function updateLandordTable() {
     .then((logs) => {
         if (logs.length === 0) {
             $('#not-landlord-alert').show();
-            return Promise.reject();
+            return Promise.reject("no contracts");
         }
         $('#not-landlord-alert').hide();
         return logs.map((log) => log.returnValues.contract_address);
     })
     .then((addresses) => {
         addresses.forEach(getSmartLeaseDataForLandlord);
-    });
+    })
+    .catch(dispError);
 }   
 
 function dispError(error) {
@@ -143,72 +147,100 @@ getSmartLeaseDataForTenant = getSmartLeaseData('#tenant-table tbody');
 
 function getSmartLeaseData(table_id_name) {
     return function(address) {
-        let smartlease = SmartLease.clone();
-        smartlease.options.address = address;
-        methods = [
-            'landlord',
-            'numTenants',
-            'maxTenants',
-            'startDate',
-            'endDate',
-            'securityDeposit',
-            'monthlyRent',
-            'googlePlaceId',
-            'isActive',
-            'isSigned'
-        ];
         let tr = $(document.createElement('tr'));
-        Promise.all(methods.map((method) => {
-            return smartlease.methods[method + '()']().call();
-        }))
-        .then((results) => {
-            let isSigned = false;
-            let isActive = false;
-            tr.append($(`<td style="font-family:Monospace;">${address.toLowerCase()}</td>`));
-            results.forEach((text, idx) => {
-                switch (idx) {
-                    case 0: // Landlord name (first, last)
-                        tr.append($(`<td>${text[0]} ${text[1]}</td>`));
-                        break;
-                    case 3: // start date
-                    case 4: // end date
-                        let dateString = moment.unix(text).format("MMM Do YY");
-                        tr.append($(`<td>${dateString} (GMT)</td>`));
-                        break;
-                    case 7: // google prop id + link
-                        tr.append($(`<td><a href="#">${text}</a></td>`));
-                        break;
-                    case 8: // is active (past start date)
-                        isActive = text;
-                        if (text === false) {
-                            tr.append($(`<td><span class="badge badge-warning">Not Active</span></td>`));
-                        } else {
-                            tr.append($(`<td><span class="badge badge-success">Active</span></td>`));
-                        }
-                        break;
-                    case 9: // is signed (by at least one tenant)
-                        isSigned = text;
-                        if (text === false) {
-                            tr.append($(`<td><span class="badge badge-warning">Not Signed</span></td>`));
-                        } else {
-                            tr.append($(`<td><span class="badge badge-info">Signed</span></td>`));
-                        }
-                        break;
-                    default:
-                        tr.append($(`<td>${text}</td>`));
+        let isSigned = false;
+        let isActive = false;
+        Factory.getPastEvents('DestroyLease', {filter: {contract_address: address}, fromBlock: 0, toBlock: 'latest'})
+         .then((logs) => {
+            if (logs.length !== 0) {
+                return Promise.reject();
+            }
+            return Promise.resolve();
+        })
+        .then(() => {
+            let smartlease = SmartLease.clone();
+            smartlease.options.address = address;
+            methods = [
+                'landlord',
+                'numTenants',
+                'maxTenants',
+                'startDate',
+                'endDate',
+                'securityDeposit',
+                'monthlyRent',
+                'googlePlaceId',
+                'isActive',
+                'isSigned'
+            ];
+            return Promise.all(methods.map((method) => {
+                return smartlease.methods[method + '()']().call()
+            }))
+            .then((results) => {
+                results.forEach((text, idx) => {
+                    switch (idx) {
+                        case 0: // Landlord name (first, last)
+                            tr.append($(`<td>${text[0]} ${text[1]}</td>`));
+                            break;
+                        case 3: // start date
+                        case 4: // end date
+                            let dateString = moment.unix(text).format("MMM Do YY");
+                            tr.append($(`<td>${dateString} (GMT)</td>`));
+                            break;
+                        case 7: // google prop id + link
+                            tr.append($(`<td><a href="#">${text}</a></td>`));
+                            break;
+                        case 8: // is active (past start date)
+                            isActive = text;
+                            if (text === false) {
+                                tr.append($(`<td><span class="badge badge-warning">Not Active</span></td>`));
+                            } else {
+                                tr.append($(`<td><span class="badge badge-success">Active</span></td>`));
+                            }
+                            break;
+                        case 9: // is signed (by at least one tenant)
+                            isSigned = text;
+                            if (text === false) {
+                                tr.append($(`<td><span class="badge badge-warning">Not Signed</span></td>`));
+                            } else {
+                                tr.append($(`<td><span class="badge badge-info">Signed</span></td>`));
+                            }
+                            break;
+                        default:
+                            tr.append($(`<td>${text}</td>`));
+                    }
+                });
+            })
+            .then(() => {
+                if (table_id_name.includes('tenant')) {
+                    let signBtn = $(`<td><button class="btn btn-success" data-toggle="modal" data-target="#signature_dialog" data-contract="${address.toLowerCase()}">Sign</button></td>`);
+                    smartlease.methods.tenantToSigned(userAccount).call()
+                    .then(signStatus => {
+                            signBtn.prop('disabled', signStatus);
+                            tr.prepend(signBtn);
+                            tr.prepend($('<td></td>'));
+                    })
+                    .catch(dispError);
+                } else {
+                    let editBtn = $(`<td><button class="btn btn-info" data-toggle="modal" data-target="#contact_dialog" data-contract="${address.toLowerCase()}">Edit</button></td>`);
+                    editBtn.prop("disabled", isSigned || isActive);
+                    tr.prepend(editBtn);
+    
+                    let deleteBtn = $(`<td><button class="btn btn-danger delete-btn" data-toggle="modal" data-target="#delete-dialog" data-contract="${address.toLowerCase()}">Delete</button></td>`);
+                    deleteBtn.prop("disabled", isActive);
+                    tr.prepend(deleteBtn);
                 }
-            });
-            let editBtn = $(`<td><button class="btn btn-info" data-toggle="modal" data-target="#contact_dialog" data-contract="${address.toLowerCase()}">Edit</button></td>`);
-            if (isSigned || isActive) editBtn.prop("disabled", true);
-            tr.prepend(editBtn);
-
-            let deleteBtn = $(`<td><button class="btn btn-danger delete-btn" data-toggle="modal" data-target="#delete-dialog" data-contract="${address.toLowerCase()}">Delete</button></td>`);
-            if (isActive) deleteBtn.prop("disabled", true);
-            tr.prepend(deleteBtn);
+            })
+            .catch(dispError);
+        })
+        .catch(() => {
+            tr.append($(`<td style="font-family:Monospace;">${address.toLowerCase()}</td>`));
+            tr.addClass('bg-danger');
+            tr.append($(`<td><strong>This SmartLease has been destroyed and is no longer available to view!</strong></td>`));
+            tr.prepend($(`<td></td>`));
+            tr.prepend($(`<td></td>`));
         })
         .then(() => {
             tr.appendTo($(table_id_name));                
         })
-        .catch(dispError);
-    }
+    };
 }
