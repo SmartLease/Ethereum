@@ -35,6 +35,19 @@ function validate() {
 		})
 		.on('receipt', function(receipt) {
 			contract_address = receipt.events.NewLease.returnValues.contract_address
+			smartlease = SmartLease.clone();
+			smartlease.options.address = contract_address;
+			tenant_addresses = $('.tenant_address');
+			for (i = 0; i < tenant_addresses.length; i++) {
+				smartlease.methods.addTenant("", "", tenant_addresses[i].value)
+				.send({from: userAccount})
+				.on('error', function(error) {
+					console.log(error);
+				})
+				.on('receipt', function(receipt) {
+					console.log('added tenant with address ' + tenant_addresses[i].value);
+				});
+			};
 			getSmartLeaseDataForLandlord(contract_address);
 			$('not-landlord-alert').hide();
 			$('#close-button').click();
