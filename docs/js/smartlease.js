@@ -81,7 +81,7 @@ function setUpHandlers() {
 function checkForMetaMask() {
     return new Promise((resolve, reject) => {
         if (typeof web3 === 'undefined') {
-            $('#create-contract').prepend(
+            $('#metamask-alert').prepend(
                 $(
                 `<div class="alert alert-warning ml-5 mr-5" role="alert">
                 <h5 class="alert-heading">MetaMask is required for this site and was not detected. To install MetaMask for your browser follow <a href="https://metamask.io/" target="_blank" class="alert-link">this link</a>.</h5>
