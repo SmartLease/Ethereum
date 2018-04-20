@@ -1,4 +1,4 @@
-const FactoryAddress = '0x38831b0447eddbdf46040b70d7d662bf595262ee';
+const FactoryAddress = '0x345ca3e014aaf5dca488057592ee47305d9b3e10';
 const FactoryURI = 'build/contracts/SmartLeaseFactory.json';
 const SmartLeaseURI = 'build/contracts/SmartLease.json';
 
@@ -131,8 +131,7 @@ function updateLandordTable() {
     })
     .then((addresses) => {
         addresses.forEach(getSmartLeaseDataForLandlord);
-    })
-    .catch(dispError);
+    });
 }   
 
 function dispError(error) {
