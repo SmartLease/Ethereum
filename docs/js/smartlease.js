@@ -18,12 +18,35 @@ var userAccount;
 */
 
 $(function() {
+    setUpHandlers();
+
     checkForMetaMask()
     .then(loadContracts)
     .then(startUpdateLoop)
     .catch(dispError)
 });
 
+
+function setUpHandlers() {
+    $('#delete-dialog').on('show.bs.modal', function(modal_event) {
+        console.log('here')
+        let btn = $(modal_event.relatedTarget);
+        let contract_address = btn.data('contract');
+
+        let dialog = $(this);
+        dialog.find("button:contains('Delete')").on('click', function(delete_event) {
+            let smartlease = SmartLease.clone();
+            smartlease.options.address = contract_address;
+            console.log(contract_address);
+            smartlease.methods.destroy().send({from: userAccount})
+            .on('error', dispError)
+            .on('receipt', function(receipt) {
+                console.log(receipt);
+                dialog.modal('hide');
+            });
+        });
+    });
+}
 
 function checkForMetaMask() {
     return new Promise((resolve, reject) => {
@@ -176,11 +199,11 @@ function getSmartLeaseData(table_id_name) {
                         tr.append($(`<td>${text}</td>`));
                 }
             });
-            let editBtn = $(`<td><button class="btn btn-info" data-toggle="modal" data-target="#contact_dialog">Edit</button></td>`);
+            let editBtn = $(`<td><button class="btn btn-info" data-toggle="modal" data-target="#contact_dialog" data-contract="${address.toLowerCase()}">Edit</button></td>`);
             if (isSigned || isActive) editBtn.prop("disabled", true);
             tr.prepend(editBtn);
 
-            let deleteBtn = $(`<td><button class="btn btn-danger" data-toggle="modal" data-target="#delete-dialog">Delete</button></td>`);
+            let deleteBtn = $(`<td><button class="btn btn-danger delete-btn" data-toggle="modal" data-target="#delete-dialog" data-contract="${address.toLowerCase()}">Delete</button></td>`);
             if (isActive) deleteBtn.prop("disabled", true);
             tr.prepend(deleteBtn);
         })
