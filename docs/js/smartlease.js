@@ -37,12 +37,13 @@ function setDeleteHandler() {
             delete_event.preventDefault();
             let smartlease = SmartLease.clone();
             smartlease.options.address = contract_address;
-            smartlease.methods.destroy().send({from: userAccount, gas: 10000000})
-            .on('error', dispError)
-            .on('receipt', function(receipt) {
-                console.log(receipt);
-                dialog.modal('hide');
-            })
+            console.log(smartlease.options.address);
+            smartlease.methods.destroy().send({from: userAccount})
+            // .on('error', dispError)
+            // .on('receipt', function(receipt) {
+            //     console.log(receipt);
+            //     dialog.modal('hide');
+            // })
             .then(console.log)
             .catch(dispError);
         });
@@ -177,10 +178,11 @@ function getSmartLeaseData(table_id_name) {
         let tr = $(document.createElement('tr'));
         let isSigned = false;
         let isActive = false;
-        Factory.getPastEvents('DestroyLease', {filter: {contract_address: address}, fromBlock: 0, toBlock: 'latest'})
+        Factory.getPastEvents('DestroyLease', {fromBlock: 0, toBlock: 'latest'})
         .then((logs) => {
-            // console.log(logs);
+            console.log(logs);
             if (logs.length !== 0) {
+                console.log('destroy:', logs);
                 return Promise.reject();
             }
             return Promise.resolve();
