@@ -17,8 +17,7 @@ function validate() {
 		return;
 	}
 
-	if (userAccount && Factory)
-	{
+	if (userAccount && Factory) {
 		Factory.methods.createContract(
 			first_name,
 			last_name,
@@ -31,29 +30,36 @@ function validate() {
 			)
 		.send({from: userAccount})
 		.on('error', function(error) {
+			console.log(error);
 			$("#failed-contract-alert").show();
 		})
-		.on('receipt', function(receipt) {
-			contract_address = receipt.events.NewLease.returnValues.contract_address
-			smartlease = SmartLease.clone();
+		.then( function(receipt) {
+			// console.log('the receipt', receipt);
+			contract_address = receipt.events.NewLease.returnValues.contract_address;
+			let smartlease = SmartLease.clone();
 			smartlease.options.address = contract_address;
-			tenant_addresses = $('.tenant_address');
-			for (i = 0; i < tenant_addresses.length; i++) {
-				smartlease.methods.addTenant("", "", tenant_addresses[i].value)
-				.send({from: userAccount})
-				.on('error', function(error) {
-					console.log(error);
-				})
-				.on('receipt', function(receipt) {
-					console.log('added tenant with address ' + tenant_addresses[i].value);
-				});
-			};
-			getSmartLeaseDataForLandlord(contract_address);
-			$('not-landlord-alert').hide();
-			$('#close-button').click();
+			let tenant_addresses = [];
+			let ta_obj = $('.tenant_address');
+			for (let i = 0; i < ta_obj.length; i++) {
+				tenant_addresses.push(ta_obj[i].value);
+			}
+			console.log(tenant_addresses);
+			// if (tenant_addresses.length === 0) return Promise.resolve([]);
+			Promise.all(tenant_addresses.map(addr => {
+				return smartlease.methods.addTenant('', '', addr).send({from: userAccount})
+			}))
+			.then(receipts => {
+				$("#contact_dialog").modal('hide');
+				getSmartLeaseDataForLandlord(contract_address);
+			})
+			.catch(error => {
+				console.log(error);
+			});
+		})
+		.catch(error => {
+			console.log(error);
 		});
 	}
-
 }
 
 function add_tenant_input() {

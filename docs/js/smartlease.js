@@ -45,7 +45,8 @@ function setDeleteHandler() {
             //     dialog.modal('hide');
             // })
             .then(console.log)
-            .catch(dispError);
+            .catch(dispError)
+            .finally(() => dialog.modal('hide'));
         });
     });
 }
@@ -66,7 +67,8 @@ function setSignatureHandler() {
                 smartlease.methods.signLease(msg_hash, signature).send({from: userAccount})
                 .on('error', console.log)
                 .then(receipt => {
-                    console.log(receipt);
+                    // console.log(receipt);
+                    getSmartLeaseDataForTenant(contract_address);
                 })
                 .finally(() => dialog.modal('hide'));
             });
@@ -178,7 +180,7 @@ function getSmartLeaseData(table_id_name) {
         let tr = $(document.createElement('tr'));
         let isSigned = false;
         let isActive = false;
-        Factory.getPastEvents('DestroyLease', {fromBlock: 0, toBlock: 'latest'})
+        Factory.getPastEvents('DestroyLease',{filter: {contract_address: address}, fromBlock: 0, toBlock: 'latest'})
         .then((logs) => {
             console.log(logs);
             if (logs.length !== 0) {
