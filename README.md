@@ -29,7 +29,7 @@ Our SmartLease project will stipulate the minimum components of an Ethereum smar
 ## Installation
 
 0. Install Nodejs, NPM, Docker, MetaMask (for Chrome or Firefox)
-1. Clone repo ()
+1. `git clone https://github.com/SmartLease/Ethereum.git`
 2. `$ truffle develop`
 3. `truffle(develop)$ compile --all`
 4. `truffle(develop)$ migrate --reset`
