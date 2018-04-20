@@ -216,7 +216,7 @@ function getSmartLeaseData(table_id_name) {
                             tr.append($(`<td>${dateString} (GMT)</td>`));
                             break;
                         case 7: // google prop id + link
-                            tr.append($(`<td><a href="#">${text}</a></td>`));
+                            tr.append($(`<td><a href="https://www.google.com/maps/place/?q=place_id:${text}" target=_blank>${text}</a></td>`));
                             break;
                         case 8: // is active (past start date)
                             isActive = text;
