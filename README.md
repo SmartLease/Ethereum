@@ -5,7 +5,7 @@
 ## Welcome
 Our SmartLease project will stipulate the minimum components of an Ethereum smart contract for Property leases between Landlords and Tenants.
 
-[![SmartLeaseVideoImage.png SmartLease Demo](https://www.youtube-nocookie.com/embed/J70sqNdYr-Q)](https://www.youtube-nocookie.com/embed/J70sqNdYr-Q)
+<div style="text-align: center"><img src="https://www.youtube-nocookie.com/embed/J70sqNdYr-Q)"/></div>
 
 ## Table of Contents
 * [Requirements](#requirements)
