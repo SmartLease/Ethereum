@@ -36,7 +36,7 @@ Our SmartLease project will stipulate the minimum components of an Ethereum smar
 5. `$ docker run -dit --name smartlease --mount type=bind,src="${pwd}"/docs,dst=/usr/share/nginx/html,ro -p 8080:80 nginx:latest`
 6. In your browser, unlock MetaMask (save your secret words!)
 7. Go to: `localhost:8080`
-8. Import your accounts from Truffle develop using their private keys to have access to the ether (not real Ether)
+8. Import your accounts from Truffle `develop` using their private keys to have access to the ether (not real Ether)
 9. Enjoy!
 
 ```
