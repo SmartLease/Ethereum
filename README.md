@@ -8,8 +8,6 @@ Our SmartLease project will stipulate the minimum components of an Ethereum smar
 ## Demo
 [![Demo](docs/img/SmartLeaseVideoImage.png)](https://www.youtube.com/watch?v=J70sqNdYr-Q "Demo")
 
-[SmartLease Demo](https://www.youtube.com/watch?v=J70sqNdYr-Q)
-
 ## Table of Contents
 * [Requirements](#requirements)
 * [Installation](#installation)
