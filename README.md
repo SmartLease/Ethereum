@@ -46,7 +46,8 @@ Our SmartLease project will stipulate the minimum components of an Ethereum smar
 ```
 
 ## Usage
-Open the [SmartLease](https://smartlease.github.io/Ethereum/) webpage in a browser
+Open the [SmartLease](https://smartlease.github.io/Ethereum/) webpage in a browser,
+(https://smartlease.github.io/Ethereum/)
 
 ## Credits
 SmartLease is owned and maintained by
