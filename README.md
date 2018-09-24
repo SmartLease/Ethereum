@@ -1,4 +1,5 @@
-<a href="https://snyk.io/test/github/SmartLease/Ethereum"><img src="https://snyk.io/test/github/SmartLease/Ethereum/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/SmartLease/Ethereum" style="max-width:100%;"></a>
+[![Known Vulnerabilities](https://snyk.io/test/github/SmartLease/Ethereum/badge.svg)](https://snyk.io/test/github/SmartLease/Ethereum)
+
 # Smart Lease
 
 <p align="center"><img src="docs/img/logo_color.png" width="300px" /></p>
